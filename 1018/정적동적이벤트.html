@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #wrapper{
+        border: 10px inset gray;
+    }
+    .nf{
+        border: 2px solid darkgray;
+        margin : 20px;
+    }
+</style>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="nf">발레리나</div>
+        <div class="nf">나는솔로</div>
+        <div class="nf">뉴스데스크</div>
+        <div class="nf">엄마까투리</div>
+    </div>
+<script>
+    let v_nfls = document.querySelectorAll('.nf');
+    // 정적요소
+    // v_nflx 대상으로 click이벤트부여하기
+    // 자바스크립트의 특징 >> 하나의 요소를 대상으로 제어한다.
+    for(let i=0; i<v_nfls.length; i++){
+        v_nfls[i].addEventListener('click', function(){
+            // alert(this.innerText)
+        });
+    }
+
+    // 추가요소 생성하기 (동적 요소)
+    let v_wapper = document.querySelector('#wrapper');
+    // v_wapper.innerHTML += "<div class='nf'> 동적요소 </div>"
+    // innerHTML을 사용해서 동적 요소 추가시 기존요소도 동적으로 만듦
+    // insertAdjacentHTML() 요소 추가시 기존요소는 건드리지 않음
+    v_wapper.insertAdjacentHTML('beforeend', "<div class='nf'> 동적요소 </div>")
+
+    // 동적요소는 정적인 부모가 가진 이벤트를 위임받은 방식으로 이벤트 사용 가능
+    v_wapper.addEventListener('click', function(e){
+        // alert("부모이벤트");
+
+        // console.log(event); //이벤트 키워드
+        // alert(e.target.innerText); //이벤트 객체
+
+        if(e.target.id != 'warpper'){
+            alert(e.target.innerText);
+        }
+    });
+</script>
+</body>
+</html>

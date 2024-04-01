@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    div{
+        /* 뼈대를 필수로 만들면 나머지 색상(black)과 두께(1px)는 기본값으로 적용*/
+        border-style : solid;
+        width: 200px;
+        height: 300px;
+        margin-bottom: 100px;   /* 바깥쪽여백 (동서남북으로 일괄적용) */
+
+        /* 가로 텍스트 제어 ( 한글 문자열 대상은 아님 -> break-all */
+        /* word-wrap: break-word;  */
+
+        /* 세로 텍스트 제어, height 속성 정의시만 사용가능  */
+        /* overflow: auto;  */
+    }
+    span{
+        color: yellow;
+    }
+    #ko{
+        word-break: keep-all;
+    }
+    #en{
+        word-break: break-all;
+    }
+</style>
+</head>
+<body>
+    <!-- CJK기본값 break-all(문자 기준 줄바꿈, 한문자 한문자 조각 조각 나누어서) -->
+    <div id="ko">
+        12345678901234567890123456789012345678901234567890
+        왜냐면나-나-나는오늘밤별속에있으니까
+        그러니내가불을가져와밤을밝히는걸지켜보세요
+        신발을신고,아침에일어나세요
+        우유한잔,신나게놀아보자
+        킹콩,드럼을걷어차,롤링스톤처럼굴러가
+        집에갈때노래를불러요
+        위로뛰어올라LeBron
+        딩동내전화로전화해
+        아이스티와탁구게임,huh
+        점점무거워지고있어
+        베이스붐이들리나요?
+        난준비됐어(우후)
+        인생은꿀처럼달콤해요
+        그래,이비트는돈처럼차칭,huh
+        디스코과부하,난거기에빠져있어,가도좋아
+        나는다이아몬드야,내가빛난다는거알잖아
+        야,그럼가자
+        왜냐면나-나-나는오늘밤별속에있으니까
+        그러니내가불을가져와밤을밝히는걸지켜보세요(헤이)
+    </div>
+    
+    <!-- 영문/숫자 기본값 keep-all(단어 기준 줄바꿈) -->
+    <div id="en">
+        12345678901234567890123456789012345678901234567890
+        'CauseI-I-I'minthestarstonight
+        Sowatchmebringthefireandsetthenightalight
+        Shoeson,getupinthemorn'
+        Cupofmilk,let'srockandroll
+        KingKong,kickthedrum,rollingonlikeaRollingStone
+        SingsongwhenI'mwalkinghome
+        Jumpuptothetop,LeBron
+        Dingdong,callmeonmyphone
+        Iceteaandagameofpingpong,huh
+        Thisisgettingheavy
+        Canyouhearthebassboom?I'mready(woohoo)
+        Lifeissweetashoney
+        Yeah,thisbeatcha-chinglikemoney,huh
+        Discooverload,I'mintothat,I'mgoodtogo
+        I'mdiamond,youknowIglowup
+        Hey,solet'sgo
+        'CauseI-I-I'minthestarstonight
+        Sowatchmebringthefireandsetthenightalight(hey)
+    </div>
+</body>
+</html>

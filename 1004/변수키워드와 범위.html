@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+<script>
+    
+    "use strict";   //엄격모드로 스크립트를 작성해서 가장 현대적인 표준 방식의 가이드를 제안하는 모드..
+                    //주석을 제외한 최상단에 적어야 제기능을 발휘할수있음.
+                    
+    var v_myName = "내 이름"; // 전역변수
+    function f_fnc(){
+        var sum=[];
+        for(var i=0; i<10; i++){
+            sum.push(i);
+            
+        }
+        alert("1" + v_myName);
+        console.log(sum);
+        console.log(i); //var, let의 유효범위에 따른 결과 차이 발생
+        alert("2" + v_myName);
+        var v_myName2 = "내 이름2"; // 지역변수
+        alert("3" + v_myName2);
+    }
+
+    f_fnc(); //함수호출
+
+    alert("4" + v_myName2);  //참조 에러 발생 = 지역변수에 접근 불가 
+</script>
+</head>
+<body>
+<!-- 
+    변수 키워드 3종
+
+    var
+        - 함수 범위에서 유효
+        - 재선언, 재할당만 가능
+            >> 개발자 간 오류 발생 가능성이 높아지므로 사용을 지양
+        - 변수 선언 키워드 생략 허용 
+            >> 의도치 않은 변수의 전역화를 발생시킴
+        - 호이스팅 적용됨
+            >> 변수 선언 이전에도 참조 가능하게 만드는 비정상적 코드 발생
+        
+        => 위외 같은 상황으로 개발자 간 혼란을 야기하며 코드 복잡도를 높이게 되어,
+        보안을 위한 키워드가 ES6에서 도입되었음.
+
+    let
+        - 블록 범위에서 유효
+        - 재선언 불가
+            >> 사용중인 변수에 다른 값을 할당하여 발생될 예외를 미리 차단
+        - 재할당만 가능
+
+    const
+        - 블록 범위에서 유효
+        - 재선언, 재할당 불가능하므로 선언시 반드시 값이 할당되어야함
+            (= 초기화 진행하지 않으면 에러 발생)
+        - 보통 대문자를 사용해서 선언하지만 강제는 아님
+
+        변하지 않는 값(상수)을 갖는 변수를 생성(=읽기 전용 변수)
+        * 참조타입(Array, Object, Function)에 사용 추천
+         >> 참조타입은 주소를 참조하기 때문에 값 변경 가능
+ 
+    -->
+
+<script>
+    const PTYPE = "기본형";
+    const PTYPE1 = ["참", "조", "형"];
+    const PTYPE2 = {o:"오", 'b':'브', "ject":'젝'};
+    const PTYPE3 = function(param){
+        if(param){
+            return "전달된 값 : " + param;
+        } 
+        return "전달된 값 없음"
+    }
+
+
+</script>
+</body>
+</html>

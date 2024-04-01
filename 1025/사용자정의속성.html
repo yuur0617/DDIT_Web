@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h4>사용자 정의 속성(User Defined Attributes)</h4>
+    <div yurim="유림" data-alias="별병" data-hobby="취미" data-message-code="ㅈㄱㄴ"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    let v_div = document.querySelector('div');
+    
+    //점 연산자와 배열식 접근법을 이용한 값 접근이 불가(undifined)
+    // alert(v_div.yurim);  alert(v_div['yurim']); 
+//     alert(v_div.getAttribute('yurim'));
+
+    //JS방식 - dataset속성으로 접근하고 data키워드는 생략
+//    alert(v_div.dataset.alias);
+//    alert(v_div.dataset['hobby']);
+    // alert(v_div.dataset['message-code']); //하이픈을 마니어스로 인식하여 undifined
+//    alert(v_div.dataset['messageCode']); // kebab cas >> camel case로 변환하여 접근하기
+
+    //JQ방식 - attr(full 속성명), data(data키워드는 생략, kebab case와 camel case) 로 접근
+    alert("JQ" + $('div').attr('data-message-code'));
+    alert("kebab" + $('div').data('message-code'));
+    alert("camel" + $('div').data('messageCode'));
+    
+     
+</script>
+</body>
+</html>

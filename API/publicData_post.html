@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    let req = new XMLHttpRequest();
+    req.opens('post','http://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1');
+
+    req.onreadystatechange = function(){
+        if(req.readyState == 4 && req.status == 200){
+            console.log(JSON.parse(req.responseText))
+        }
+    }
+    let data = 'ServiceKey=4YSkrXohYyAXPdPB2O8cmGDqnL105iG%2FMGVcIlBeRKjx%2FeCKBVxfDc'
+            +'2yNiP%2F7AAFs3L7QzrpkEXVeikPDoOE1g%3D%3D'
+        + 'type=json';
+    req.send(data);
+</script>

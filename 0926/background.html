@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #container{
+        height: 100vh;  /* ViewHeight : 보여지는 영역의 100%를 제공 */
+    }
+    [id*=content]{
+        width: 90%;
+        height: 90%;/* 부모가 없을경우 %사용 불가 */
+        border: 20px dashed lightgray;
+    }
+
+    /*각 속성 부여*/
+    #content{
+        width: 90%;
+        height: 90%;   /* 부모가 없을경우 %사용 불가 */
+        background-color: rgb(230, 255, 210);
+        background-image: url(../images/ogu04.jpg);
+        background-size: 50%;
+        background-repeat: no-repeat;
+        /* background-position: center; */
+
+        border: 20px dashed lightgray;
+        padding : 20px;
+
+        background-clip: content-box;   /*bg-color의 범위지정 */
+
+        background-origin: border-box; /* bg-img의 범위 지정*/
+    }
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    /* 축약 방식 정의*/
+    #content1{
+        width: 90%;
+        height: 90%;
+        border: 20px dashed lightgray;
+    /*  
+        축약 color image position/size repeat origin clip attachment
+        - 순서 병경가능, 항목 생략 가능
+        - size는 position뒤에 슬래시 표기 후 배치할것
+            position과 size는 일부 값의 단위를 공유하므로 반드시 슬래시로 구분!
+            position은 단독 사용가능, size는 position과 같이 설정 해야함!
+        -origin 다음 clip 배치할것
+    */
+        background: lightgoldenrodyellow  url(../images/ogu12.jpg) 0px 0px/100px no-repeat content-box border-box; 
+    }
+    /*하나의 영역에 여러 배경이미지 삽입*/
+    /* 먼저 작성된 이미지가 상위프레임 */
+    #content2{
+        background: url(../images/ogu05.jpg) left top/30% repeat-x, 
+                    url(../images/ogu07.jpg) right bottom/30% repeat-y;
+    }
+    #content3{
+        /* background: url(../images/ogu04.jpg) center center/cover no-repeat; */
+        /* 자식요소에 상속 */
+        /* opacity: 0.5;  */
+    }
+    /* 해당영역에 가상의 요소를 하나만들어서 활용 */
+    #content3::before{
+        background: url(../images/ogu04.jpg) center center/cover no-repeat;
+        opacity: 0.8;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    span{
+        /* 원래요소는 static(정적, 움직이지 않는)상태 */
+        position: absolute;
+    }
+</style>
+</head>
+<body>
+    <!-- 요소들을 감사는 가장 상위요소에 보통container또는 wrapper라는 id명을 부여함 -->
+    <div id="container">
+        <div id="content3">
+            <SPan>입력된 내용은 투명처리 시러잉..</SPan>
+        </div>
+    </div>
+</body>
+</html>

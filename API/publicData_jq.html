@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script src="../js/code.jquery.com_jquery-3.7.1.min.js"></script>
+<script>
+    //queryString 으로 정보를 넘겨서 get하였음! (서비스키는 인코딩 키 사용)
+/*    
+    $.ajax({
+        url:'http://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1'
+            +'?ServiceKey=4YSkrXohYyAXPdPB2O8cmGDqnL105iG%2FMGVcIlBeRKjx%2FeCKBVxfDc2yNiP%2F7AAFs3L7QzrpkEXVeikPDoOE1g%3D%3D'
+            +'&type=json' ,
+            type: 'get',
+        // data:'',
+        success:function(data){
+            console.log("제이쿼리 방식 조회 >>",data)
+        },
+        error: function(xhr){
+            alert("상태 : "+ xhr.status);
+        },
+        // dataType:''
+    });
+*/
+    //data 변수에 담아 정보를 한겹 숨겨서 보냄(하지만 get으로 요청한점은 동일!)
+    $.ajax({
+        url:'http://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1',
+        type:'get',
+        data:'?ServiceKey=4YSkrXohYyAXPdPB2O8cmGDqnL105iG/MGVcIlBeRKjx/eCKBVxfDc2yNiP/7AAFs3L7QzrpkEXVeikPDoOE1g=='
+            +'&type=json' ,
+        type: 'get',
+        success: function(data){
+            console.log("제이쿼리(요청변수 숨겨서 보냄)", data)
+        },
+        error: function(xhr){
+            alert("상태 : " + xhr.status)
+        },
+        // dataType:'';
+
+    });
+</script>

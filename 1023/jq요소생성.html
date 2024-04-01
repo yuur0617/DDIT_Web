@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(function(){
+        //jQuery방식으로 요소 생성하기 - 한 문자열에 요소의 모든 정보 담기
+        $('input').on('click', function(){
+            let v_tagP = $("<p title='★' onclick='f_click(this)'> Hi★ jQuery~!! </p>");
+            $('div').append(v_tagP); // 부모.append(자식), 태그를 파싱해서 화면에 잘 반영시킴
+            // $('div').appendChild(v_tagP); // DOM객체 대상으로만 가능(jQuery에서 사용 불가)
+            // $('div').html(v_tagP); //1회만 화면에 추가하는 형태
+        });
+
+        //jQuery방식으로 요소 생성하기 - 요소껍데기만 생성 후 속성을 객체형태로 따로 설정
+        $('button').on('click', function(){
+            $("<p></p>",{
+                title : '♥',
+                text : 'Hello♥ jQuery..',
+                // click: function(){
+                    // 웹 문서에서 이벤트 발생시 실행될 함수를 웹 브라우저에 알려아함
+                    // 이때 이벤트와 처리함수를 연결하는 것을 '이벤트 처리기' 또는 '이벤트 핸들러'라고함
+                    // 이벤트처리기(=이벤트 핸들러)는 이벤트 앞에 on을 붙여 사용한다.
+                onclick : function(){
+                    $(this).css('color', 'gold').css('backgroundColor', 'lightblue');
+                }
+            }).appendTo($('div')); // 자식.appendTo(부모)
+        });
+    });
+
+    function f_click(p_this){
+        $(p_this).css('color', 'orange').css('textShadow', '2px 2px 2px red');
+    }
+</script>
+</head>
+<body>
+    <input type="button" value="문자열로 일괄 생성">
+    <button>요소만 생성후 속성 지정</button>
+    <div></div>
+</body>
+</html>

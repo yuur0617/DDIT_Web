@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    img {
+        width: 80px;
+        height: 80px;
+    }
+    div {
+        padding: 10px;
+        margin: 10px;
+    }
+    .pColor {
+        color:lime;
+    }
+    .pBgBlack {
+        background-color: black;
+    }
+    .pBgPurple{
+        background-color: purple;
+    }
+    .borderOlive{
+        border: 7px dashed olive;
+        border-radius: 20px;
+        padding: 10px;
+    }
+</style>
+<body>
+    <input type="button" id="btn" value="확인">
+    <p>click!!!</p>
+    <p>click!!!</p>
+    <p>click!!!</p>
+    <p>click!!!</p>
+
+    <div></div>
+
+    <img src="../images/ogu.jpg" alt="ala">
+    <img src="../images/ogu01.jpg" alt="lion">
+    <img src="../images/ogu03.jpg" alt="som1">
+    <img src="../images/ogu17.jpg" alt="bara2">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $('#btn').on('click',function(){
+            // $('p').css('color','gold');
+            //addClass(class)
+            $('p').addClass('pColor');
+        });
+        $('p').on('click',function(){
+            /*
+            // $('p').addClass('pBgBlack');
+            //hasClass()를 이용한 add-remove
+            if($(this).hasClass('pBGBlack')){
+                // 스타일정보가 적용되었을 때 removeClass
+                $(this).removeClass('pBgBlack');
+            }else{
+                //스타일정보가 적용되지 않았을 때 addClass
+                $(this).addClass('pBgBlack');
+            }
+            */
+        });
+
+        /*
+        // $('div').on('mouseover',function(){
+        $('div').on('mouseenter',function(){
+            $(this).addClass('pBgBlack');
+        });
+        // $('div').on('mouseout',function(){
+        $('div').on('mouseleave',function(){
+            $(this).removeClass('pBgBlack');
+        });
+        */
+        $('p').hover(function(){
+            $(this).addClass('pBgPurple');
+        },function(){
+            $(this).removeClass('pBgPurple');
+        });
+
+        $('img').on('dblclick',function(){
+            $(this).toggleClass('borderOlive');
+        })
+
+    </script>
+</body>
+</html>

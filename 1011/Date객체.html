@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    console.log("국제 표준시 >>", new Date());
+    // 가독성 있는 날짜 정보 제공 메소드
+    console.log(new Date().toLocaleString() );
+    console.log(new Date().toLocaleDateString() );
+    console.log(new Date().toLocaleTimeString() );
+
+    //1970.1.1 오전 9:00기준 + millisecons가 더해진 날짜 변환
+    console.log(new Date(3000).toLocaleString() );
+
+    console.log(new Date("2023.10.11").toLocaleString() )
+
+    // new Date(year, month, [date, hour, min, sec, ms])
+    // month는 0부터 제공함 - get(+1) / set(-1)
+    console.log(new Date(2023, 10-1, 11, 15, 33, 25).toLocaleString() );
+
+    // getTime(지정한 날짜) - 기준일 (1970.1.1)부터 지정날짜까지 경과된 시간은 ms 단위로 변환
+    
+    let today = new Date();
+    console.log(today.getTime());
+    console.log(todayMs);
+
+</script>

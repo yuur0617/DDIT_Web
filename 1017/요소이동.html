@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    img{
+        width: 150px;
+        height: 150px;
+    }
+    #wrapper{
+        font-size:0;
+    }
+</style>
+</head>
+<body>
+    <div id="wrapper">
+        <img src="../images/ogu05.jpg" alt="">
+        <img src="../images/ogu07.jpg" alt="">
+        <img src="../images/ogu12.jpg" alt="">
+        <img src="../images/ogu13.jpg" alt="">
+    </div>
+    <input type="button" id="left" value="&lt;&lt;&lt;">
+    <input type="button" id="stop" value="||">
+    <input type="button" id="right" value="&gt;&gt;&gt;">
+
+<script>
+
+    let v_parent = document.querySelector('#wrapper');
+    let v_left = document.getElementById('left');
+    let v_right = document.getElementById('right');
+
+    let timer;
+
+    //left버튼 - append, appendChild >> 영역의 마지막에 배치
+    document.getElementById('left').addEventListener('click',function(){
+        
+        timer = setInterval(f_moveLeft ,1000);
+    });
+
+        //부모영역의 자식요소 중 첫번째 항목 가져오기
+        function f_moveLeft(){
+        //노드 속성 - childNodes, element 노드속성 - children
+        // console.log(v_parent.children[0]); // 4 자식요소
+
+        let firstChild = v_parent.children[0];
+        v_parent.append(firstChild); //요소이동
+
+        // v_left.style.display = "none";
+        v_left.setAttribute('disabled', true);
+        // v_right.style.display = "none";
+        v_right.setAttribute('disabled', true);
+        }
+
+    document.querySelector('#right').onclick = function(){
+
+        timer = setInterval(f_moveRight,1000);
+
+    };
+
+        // 자식요소중 마지막 항목 가져오기 - (자식요소가 몇개인지 가늠안될때 (index정보를 모를때), 
+        // 노드속성 - lastChild, element노드 속성 - lastElementchild
+        function f_moveRight(){
+        let lastChild = v_parent.lastElementChild;
+
+        // insertBefore(value, position)
+        v_parent.insertBefore(lastChild, v_parent.children[0])
+
+        // v_left.style.display = "none";
+        v_left.setAttribute('disabled', true);
+        // v_right.style.display = "none";
+        v_right.setAttribute('disabled', true);
+        }
+
+    document.querySelector('#stop').addEventListener('click', function(){
+        clearInterval(timer);
+
+        // 사라진 버튼 보여지기
+        // v_left.style.display ="inline";
+        // v_right.style.display ="inline";
+        v_left.removeAttribute('disabled');
+        v_right.removeAttribute('disabled');
+    });
+        
+    
+
+</script>
+</body>
+</html>

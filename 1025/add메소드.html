@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    p{
+        border: 3px ridge orange;
+        display: inline-block; 
+        margin: 10px 0;
+    }
+</style>
+</head>
+<body>
+    <h4>요소 정보로 이미지 생성 후 영역에 추가하기</h4>
+    <p title="ogu01.jpg">꾸리오구</p> <br>
+    <p title="ogu03.jpg">노답오구</p> <br>
+    <p title="ogu04.jpg">우주오구</p> <br>
+    <p title="ogu17.jpg">행복오구</p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $('p').on('click', function(){
+        let titleToSrc = $(this).attr('title'); //title속성값을 src속성값으로 활용
+        let textToAlt = $(this).text(); //content(text)정보를 alt속성값으로 활용
+
+        //JS방식 이미지요소 생성(DOMString ==> innerHTML, insertAdjacentHTML())
+        let jsImg = "<img src ='../images/" + titleToSrc +"'width='100px;'\
+            title ='JS동적생성 1' alt='" + textToAlt + "'>";
+        // this.innerHTML = jsImg; // 기존요소는 없어지고 덮어씀
+        // this.innerHTML += jsImg; //  기존요소에 추가하는 형태
+
+        //JS 방식 이미지요소 생성(Node 생성 ==> append(), appendChild())
+        let v_img = document.createElement('img');
+        v_img.src = "../images/" + titleToSrc;
+        v_img.alt = textToAlt;
+        v_img.width = 200;
+        v_img.title = "JS동적 생성 2";
+
+        this.append(v_img); // 추가
+        this.appendChild(v_img); // 이동
+
+        this.insertBefore(v_img/*입력할 요소*/, null) //2번째 인자가 null인 경우 append와 동일
+        this.insertBefore(v_img, this.firstChild) //2번째 인자가 null인 경우 append와 동일
+
+        this.after(v_img); // 대상 요소 외부 뒤편에 추가/이동
+        this.before(v_img); // 대상 요소 외부 앞편에 추가/이동
+
+        //JQ방식 이미지 요소 생성
+        // $("<img src='" + titleToSrc + "' alt=''>");
+        let jqImg = $(`<img src=' ../images/${titleToSrc} ' alt='${textToAlt}' width='100px;' title='jq이미지1'>`);
+        
+        // before(외부앞), prepend(내부앞), append(내부뒤), after(외부뒷)
+        // insertDefoe(외부앞), prependTo(내부앞), appendTo(내부뒷), insertAfter(외부뒷)
+
+        // 부모.append(자식)    // 자식.appendTo(부모)  
+        $(this).append(jqImg); // jqImg.appendTo(this);   
+    
+        let jqImg2 = $('<img>',{
+            'src' : '../images/' + titleToSrc,
+            'alt' : textToAlt,
+            'width' : 150,
+            'title' : 'jq이미지2'
+        }).insertAfter(this);
+    })
+
+    
+</script>
+</body>
+</html>

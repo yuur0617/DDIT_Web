@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #container{
+        width: 700px;
+        height: auto;
+    }
+    .d_div{
+        border: 1px dashed red;
+        width: calc(50% - 10px);  /* div간 간격 벌리기  */
+        height: 400px;
+        float: left;
+        box-sizing: border-box; /* 바깥쪽여백을 제외한 나머지(테두리, 안쪽여백)만 계산식에 포함 */
+        margin: 5px;
+        font-size: 12px;
+    }
+    img{
+        width: 200px;
+        height: 150px;
+        margin-bottom: 10px;
+    }
+    h3{
+        background-color: lightpink;
+        padding: 5px;
+        font-size: 20px;
+    }
+    .cl_div span{
+        background-color: lightblue;
+        color: red;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .ct_div span{
+        background-color: lightblue;
+        color: green;
+        font-size:15px;
+        font-weight: bold;
+
+    }
+    #tiger{
+        overflow: auto;
+    }
+</style>
+
+</head>
+<body>
+    <div id = "container">
+        <div class = "d_div">
+            <p><h3>사자</h3></p>
+            <img src="../images/lion.jpg" alt="사진이 없을떄 나오는 글">
+            <div class="cl_div">사자 (獅子, lion)는 식육목 고양이과 표범속으로 분류되는 오유동물이다. 
+                현존하는 고양잇과 동물 중에서 호랑이에 이어 두번째로 큰 종이다. 
+                사자는 흔히 <span>백수(百獸)의 왕</span>으로 불리며, 고양잇과 동물 가운데 사자만이 무리를 지어산다. 
+                사라무리를 '프라이드'라고 하는데 한마리의 수컷이 여러 암컷들을 거느리고 다니는 습성으로 인하여 
+                수사자는 동서고금 가리지 않고 <span>왕권의 상징</span>으로 사용되어 왔다.
+            </div>
+        </div>
+        <div class = "d_div" id="tiger">
+            <p><h3>호랑이</h3></p>
+            <img src="../images/tiger.jpg" alt="사진이 없을때 나오는 글">
+            <div class="ct_div">호랑이(虎狼이) 또는 범, 칡범, 갈범(이는 표범과 구별하여 일컫는 말이다.)은 
+                식육목 <span>고양이과에 속하는 맹수</span>이다. 대한민국의 대표 동물이다. 한국어에서 어린 개체는 개호주라 부른다. 
+                다만 2020년대에는 인터넷 신조어로 고양이와 호랑이를 합쳐 "호양이" 라는 단어가 유행하고 있다. 
+                이 단어를 공식적으로 처음 사용한 것은 지상파 방송 프로그램 TV 동물농장이다.
+                고양이과 동물 중 그 크기가 가장 크다. 호랑이의 크기는 아종에 따라 다양한데, 발리호랑이는 100kg 미만이며, 
+                시베리아호랑이는 수컷의 경우 최대 360kg에 이르기도 한다. 대개 황갈색 바탕에 검은색 줄무늬가 있다. 
+                드물게 흰색을 띤 흰 호랑이인 백호가 있는데, 이는 백색증과 무관한 열성유전자가 발현되어 나타나는 것이다.
+                스라소니나 고기잡이삵, 재규어를 제외하면 유일하게 수영을 할 수 있다.
+                (단, 재규어 같은 경우에는 단지 사냥을 목적으로 수영을 할 뿐 호랑이처럼 주기적으로 물에 들어가지는 않는다.)        
+                뼈를 비롯한 신체의 대부분의 부위가 한약으로 쓰이고 있으며, 
+                그로 인해 심각한 생존의 위협을 받고 있다. 12간지 동물 중 하나이다. 
+                그리고 호랑이의 생김새는 눈,발,입,몸통 등이 있는데 호랑이는 시력이 좋지 않다고 알려져있다.</div>
+        </div>
+    </div>
+</body>
+</html>

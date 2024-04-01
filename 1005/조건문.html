@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    div{
+        border: 2px solid red;
+    }
+</style>
+</head>
+<body>
+    <input type="button" value="계산" onclick="f_calc()">
+    <div>
+        출력 결과
+    </div>
+
+<script>
+    var v_div = document.querySelector('div')
+    function f_calc(){
+        //숫자2, 연산자1 입력받기
+
+        let su1 = parseInt(prompt("숫자 1")); // 연산전에 정수형으로 변경하기!
+        let su2 = parseInt(prompt("숫자 2"));
+        let oprt = prompt("연산자", "+. -. * , / 중 입력하세요");
+
+        console.log(su1, su2, oprt);
+
+        //isNaN() >> 값이 NaN(숫자아닌 값)일 때 true 반환
+        if(isNaN(su1) || isNaN(su2)){
+            alert("숫자만 입력하세요.");
+            return f_calc;
+        }
+
+        let hap = "";
+        if(oprt =='+'){
+            hap = su1 + su2;
+        }else if(oprt == '-'){
+            hap = su1 - su2;
+        }else if(oprt == '*'){
+            hap = su1 * su2;
+        }else if(oprt == '/'){
+            hap = su1 / su2;
+        }else{
+            alert("지정한 연산자를 입력하세요.");
+            return f_calc;
+        }
+
+        console.log("결과 >>", hap)
+        //출력영역(div)에 결과 값을 출력해봅시당
+        v_div.innerText = su1 + oprt + su2 + "=" + hap
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	function fn_list() {
+		var param = "";
+		param += "dummy=" + Math.random();
+		param += "&domain_url=hello";
+		$.ajax({
+			url : "emp_list",
+			data : param,
+			dataType : "json",
+			type : "post",
+			async : true,
+			success : function(res) {
+				var list = res;
+				var txt = "";
+				for (var i = 0; i < list.length; i++) {
+					var e = list[i];
+					txt += "<tr>";
+					txt += "<td><a href='javascript:fn_one(\"" + e.e_id + "\")'>" + e.e_id + "</a></td>";
+					txt += "<td>" + e.e_name + "</td>";
+					txt += "<td>" + e.gen + "</td>";
+					txt += "<td>" + e.addr + "</td>";
+					txt += "</tr>";
+				}
+				$("#my_tbody").html(txt);
+			}
+		});
+	}
+
+	function fn_one(e_id) {
+		var param = "";
+		param += "dummy=" + Math.random();
+		param += "&e_id="+e_id;
+		$.ajax({
+			url : "emp_one",
+			data : param,
+			dataType : "json",
+			type : "post",
+			async : true,
+			success : function(res) {
+				var vo = res;
+				$("#e_id").val(vo.e_id);
+				$("#e_name").val(vo.e_name);
+				$("#gen").val(vo.gen);
+				$("#addr").val(vo.addr);
+			}
+		});
+	}
+
+	$(document).ready(function() {
+		fn_list();
+	});
+
+	function fn_add() {
+		var param = "";
+		param += "dummy=" + Math.random();
+		param += "&e_id=" + $("#e_id").val();
+		param += "&e_name=" + $("#e_name").val();
+		param += "&gen=" + $("#gen").val();
+		param += "&addr=" + $("#addr").val();
+		$.ajax({
+			url : "emp_add",
+			data : param,
+			dataType : "json",
+			type : "post",
+			async : true,
+			success : function(res) {
+				var cnt = res;
+				if (cnt == 1) {
+					fn_list();
+					alert("정상적으로 추가 되었습니다.")
+					$("#e_id").val("");
+					$("#e_name").val("");
+					$("#gen").val("");
+					$("#addr").val("");
+				} else {
+					alert("추가 되지 않았습니다.")
+				}
+			}
+
+		});
+	}
+	
+	function fn_mod() {
+		var param = "";
+		param += "dummy=" + Math.random();
+		param += "&e_id=" + $("#e_id").val();
+		param += "&e_name=" + $("#e_name").val();
+		param += "&gen=" + $("#gen").val();
+		param += "&addr=" + $("#addr").val();
+		$.ajax({
+			url : "emp_mod",
+			data : param,
+			dataType : "json",
+			type : "post",
+			async : true,
+			success : function(res) {
+				var cnt = res;
+				if (cnt == 1) {
+					fn_list();
+					alert("정상적으로 수정 되었습니다.")
+					$("#e_id").val("");
+					$("#e_name").val("");
+					$("#gen").val("");
+					$("#addr").val("");
+				} else {
+					alert("수정 되지 않았습니다.")
+				}
+			}
+
+		});
+	};
+	function fn_del() {
+		var param = "";
+		param += "dummy=" + Math.random();
+		param += "&e_id=" + $("#e_id").val();
+		$.ajax({
+			url : "emp_del",
+			data : param,
+			dataType : "json",
+			type : "post",
+			async : true,
+			success : function(res) {
+				var cnt = res;
+				if (cnt == 1) {
+					fn_list();
+					alert("정상적으로 삭제 되었습니다.")
+					$("#e_id").val("");
+					$("#e_name").val("");
+					$("#gen").val("");
+					$("#addr").val("");
+				} else {
+					alert("삭제 되지 않았습니다.")
+				}
+			}
+
+		});
+	}
+
+	$(document).ready(function() {
+		fn_list();
+		$("#btn_add").on('click', function() {
+			fn_add();
+		})
+		
+		$("#btn_mod").on('click', function() {
+			fn_mod();
+		});
+		
+		$("#btn_del").on('click', function() {
+			fn_del();
+		})
+
+	})
+</script>
+</head>
+<body>
+	EMP_CRUD
+	<br>
+	<table border="3px">
+		<thread>
+		<tr>
+			<td>사번</td>
+			<td>이름</td>
+			<td>성별</td>
+			<td>주소</td>
+		</tr>
+		</thread>
+		<tbody id="my_tbody">
+			<tr>
+				<td colspan="4">선택된 데이터가 없습니다.</td>
+		</tbody>
+	</table>
+	<table border="3px">
+		<tr>
+			<td>사번</td>
+			<td><input type="text" id="e_id" /></td>
+		</tr>
+		<tr>
+			<td>이름</td>
+			<td><input type="text" id="e_name" /></td>
+		</tr>
+		<tr>
+			<td>성별</td>
+			<td><input type="text" id="gen" /></td>
+		</tr>
+		<tr>
+			<td>주소</td>
+			<td><input type="text" id="addr" /></td>
+		</tr>
+		<tr>
+			<td colsapn="2">
+			<input type="button" value="추가" id="btn_add" />
+			 <input type="button" value="수정" id="btn_mod" /> 
+			 <input type="button" value="삭제" id="btn_del" /></td>
+		</tr>
+	</table>
+</body>
+</html>

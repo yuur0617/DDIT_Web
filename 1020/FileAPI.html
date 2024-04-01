@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+<style>
+    .wrapper{
+        background-color: lightgray;
+        padding: 10px;
+        margin: 10px;
+    }
+    div:nth-of-type(2) div{
+        border-style: solid;
+        height : 200px;
+        background-color: white;
+        overflow: auto;
+    }
+    div:nth-of-type(3) div{
+        border : 2px dashed gold;
+        height : 50px;
+        background-color: white;
+        overflow: auto;
+    }
+</style>
+</head>
+<body>
+    <div class="wrapper">
+        <input type="file" id="attchFile">
+        <input type="button" value="읽기">
+    </div>
+    <div class="wrapper">
+        <h1>결과출력(FileReader 객체)</h1>
+        <p>이미지파일일 경우에는 DataURL형식으로 아닌겨우 Text형식으로</p>
+        <div id="div1"></div>
+    </div>
+    <div class="wrapper">
+        <h1>파일 정보(File 객체)</h1>
+        <p>이미지 파일을 읽은 경우에 이미지가 표시된다<br>
+        다른 파일을 읽었을 경우 이미지가 표시되지 않는다. </p>
+        <div id="div2"></div>
+    </div>
+
+<script>
+    let v_btn = document.querySelector('[type=button]');
+
+    let v_div1 = document.querySelector('#div1');
+
+    v_btn.addEventListener('click',function(){
+        let v_fBtn = document.querySelector('#attchFile');
+        let v_file = v_fBtn.files[0];; //한개의 파일
+        // type : "image/jpeg", type : "text/plain"
+        // 데이터 타입 구하기 - split(구분자) 문자 -> 배열로 변환
+        
+        let type = v_file.type.split("/")[0];
+        console.log(type);
+        
+        if(type == 'text'){
+
+            let rd = new FileReader();
+            rd.onload = function(){
+                // console.log(rd.result)
+                v_div1.innerText = rd.result;
+
+            }
+            rd.readAsText(v_file); //텍스트 파일의 내용을 읽는 메서드
+
+            //div2번째 영역에 v_file이 갖고있는 정보들 출력하기
+            let v_fInfo = "파일명 : " + v_file.name + "<br>"
+            v_fInfo += `파일크기 :  ${v_file.size} <br>`;
+            v_fInfo += `파일 종류 : ${v_file.type} <br>`;
+            v_fInfo += `최근 수정일자 : ${new Date(v_file.lastModifiedDate).toLocaleDateString()}`;
+            document.querySelector('#div2').innerHTML = v_fInfo;
+
+        }else if(type == 'image'){
+            // todo: readAsDataURL()을 이용해 이미지 정보 처리하고 div1영역에 출력
+            let rd = new FileReader();
+            rd.onload = function(){
+                let v_img = document.createElement('img');
+                v_img.src = rd.result;
+                v_img.width = 100;
+                v_img.alt ="이미지표현 안될때 대체 텍스트";
+                
+                v_div1.append(v_img);
+                
+            }
+            rd.readAsDataURL(v_file);
+            let v_fInfo = "파일명 : " + v_file.name + "<br>"
+                v_fInfo += `파일크기 :  ${v_file.size} <br>`;
+                v_fInfo += `파일 종류 : ${v_file.type} <br>`;
+                v_fInfo += `최근 수정일자 : ${new Date(v_file.lastModifiedDate).toLocaleDateString()}`;
+                document.querySelector('#div2').innerHTML = v_fInfo;
+            
+            // todo: File객체의 정보들 div2영역에 출력
+        }else{
+            // application은 추가적인 코드 필요
+        }
+        
+    });
+</script>
+</body>
+</html>

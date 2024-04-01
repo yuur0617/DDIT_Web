@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    div{
+        border: 2px double green;
+        height: 50px;
+    }
+</style>
+</head>
+<body>
+    <div id="ran10">10진수 랜덤색 표현 <br></div>
+    <input type="button" id="ranColor10" value="랜덤컬러">
+    <input type="button" id="stop" value="정지">
+
+    <div id="ran16">16진수 랜덤색 표현 <br></div>
+    <input type="button" id="ranColor16" value="랜덤컬러">
+
+<script src="../js/random.js"></script>
+
+<script>
+/*    document.querySelector('#ranColor10').addEventListener('click',function(){
+        
+        //setInterval(fn, ms); //지정된 ms마다 함수를 실행
+        // setInterval(randomColor10, 1000);
+
+        //setTimeout(fn, ms); //지정한 ms가 지나면 함수 1회 발생
+        setTimeout(randomColor10, 1000);
+        
+    });
+*/
+
+    let ranColor10;
+    let timer;
+
+    document.querySelector('#ranColor10').addEventListener('click', randomColor10 = function(){
+
+        //10진수 색상 정보 rbg(0~255, 0~255, 0~255)
+        random10 = []; //빈 배열
+        for(let i=0; i<3; i++){
+            random10[i] = f_random(0,255);
+        }
+
+        console.log(random10);
+
+        //출력
+        document.querySelector('#ran10').style.color = "rgb(" + random10 + ")";
+        document.querySelector('#ran10').style.borderColor = "rgb(" + random10 + ")";
+        document.querySelector('#ran10').innerHTML = "rgb("+random10+")";
+
+        timer = setTimeout(randomColor10, 1000); //재귀호출
+
+        //버튼 비활성화 상태로 만들기
+        document.querySelector('#ranColor10').setAttribute('disabled', true);
+});
+
+    document.querySelector('#stop').addEventListener('click', function(){
+        //현재 실행중인 setTimeout(randomColor) 기능을 중지시키기
+        clearTimeout(timer);
+
+        //비활성화 상태의 버픈을 다시 활성화 처리
+        document.querySelector('#ranColor10').removeAttribute('disabled');
+
+    })
+/*
+    function randomColor10() {
+    //10진수 색상 정보 rbg(0~255, 0~255, 0~255)
+    let random10 = []; //빈 배열
+        let random16 = [];
+        for(let i=0; i<3; i++){
+            random10[i] = f_random(0,255);
+
+            random16[i] = f_random(0,255).toString(16);
+        }
+
+        console.log(random16);
+
+        //출력
+        document.querySelector('#ran10').style.color = "rgb(" + random10 + ")";
+        document.querySelector('#ran10').style.borderColor = "rgb(" + random10 + ")";
+        document.querySelector('#ran10').innerHTML = "rgb("+random10+")";
+    }
+*/
+    document.querySelector('#ranColor16').addEventListener('click',function(){
+        setInterval(randomColor16, 1000);
+    });
+
+    function randomColor16(){
+        //16진수 색상 정보 #000000
+        let random16 = [];
+        for(let i=0; i<3; i++){
+            random16[i] = f_random(0,255).toString(16);
+        }
+        let color16 = random16.join('') //join() - 배열을 문자열로 합침(구분자 생략시 콤마적용)
+
+        console.log(random16, color16);
+
+        //출력
+        document.querySelector('#ran16').style.color = "#" + color16;
+        document.querySelector('#ran16').style.borderColor = "#" + color16;
+        document.querySelector('#ran16').innerText = "#"+color16;
+    }
+
+</script>
+</body>
+</html>

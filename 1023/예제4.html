@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(function(){
+        $('body').append($("<button>이미지 추가(동적)</button>"))
+
+        $('button').eq(0).on('click', function(){
+            $("<img src= '../images/ogu.jpg' \
+                alt='대체 텍스트' onclick='f_fnc(this)' width='100px'>").appendTo($('body'));
+        });
+        $('button').eq(1).on('click', function(){
+            $("<img>",{
+                src : '../images/ogu.jpg',
+                alt : '이미지 대체 텍스트',
+                width : 100,
+                click : function(){
+                    $(this).css('border', '2px dotted gold');
+                }
+            }).appendTo($('div'));
+        });
+    });
+
+    function f_fnc(p_this){
+        $(p_this).css('border','7px double gray');
+    }
+    
+</script>
+</head>
+<body>
+    <button>이미지 추가(정적)</button>
+    <div></div>
+</body>
+</html>

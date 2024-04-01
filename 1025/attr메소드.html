@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    img{
+        width: 100px;
+        height: 100px;
+    }
+</style>
+</head>
+<body>
+    <h4>요소의 속성 정보 얻기 / 설정 - 파일명 추출하여 title,속성 값으로 설정</h4>
+    <img src="../images/ogu09.jpg" alt="">
+    <img src="../images/ogu07.jpg" alt="">
+    <img src="../images/ogu13.jpg" alt="">
+    <img src="../images/ogu14.jpg" alt="">
+    <img src="../images/ogu20.webp" alt="">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    // console.log($('img').attr('scr')); //html(), val()와 같이 '첫번째 항목만 ' 반환
+    $('img').attr('title', '일괄적용');
+
+    $('img').attr('title', function(){
+
+        // console.log($('img').attr('src')); //모든 img요소 대상으로 함수 호출 후 첫번째 항목만 반환
+        let v_src = ($(this).attr('src')) // 순차적인 요소의 src정보를 얻음
+
+        // 전체 src속성값(=이미지 경로) 중 파일명만 추출해서 title속성값으로 반환(return)하기
+        let str = v_src.lastIndexOf('/') +1;
+        let end = v_src.lastIndexOf('.')
+        let v_fName = v_src.substring(str, end);
+
+        console.log(v_fName);
+
+        return v_fName;
+    });
+
+    $('img').eq(2).removeAttr('src'); // 3번째 이미지의 src속성을 제거
+    $('img').eq(2).attr({'src':'../images/ogu23.png', 'alt':'오구', 'title':'하기싫은오구'}); 
+</script>
+</body>
+</html>

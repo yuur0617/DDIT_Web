@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+  div{
+    width : 80%;
+    height: 70vh;
+  }
+</style>
+</head>
+
+<body>
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+  <button>데이터와 타입 업데이트</button>
+  <button>랜덤색 적용</button>
+  <button>AJAX로 데이터 가져오기</button>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../js/random.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+  let v_btn = document.querySelectorAll('button');
+
+  let chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['캠벨얼리', '거봉', '샤인머스캣', '기타'],
+      datasets: [{
+        type: 'doughnut',
+        label: '# 2016',
+        data: [61.4, 23.8, 1.9, 12.9],
+        backgroundColor:['purple', 'violet', 'yellowgreen', 'lime'],
+        borderWidth: 3,
+        borderColor: 'skyblue'
+      },{
+        type: 'radar',
+        label: '# 2021',
+        data: [36.6, 21.0, 31.6, 10.8],
+        backgroundColor: ['gold', 'blue', 'red', 'salmon'],
+        borderWidth: 1,
+        borderColor: 'orange'
+      }]
+    }
+  });
+
+  v_btn[0].addEventListener('click',function(){
+
+    let v_data = []; //반복해서 생성한 실수 데이터 4개를 저장할 빈 배열
+    for(let i=0; i<chart.data.labels.length; i++){
+      let v_ranVal = parseFloat (Math.random()*100).toFixed(1);
+      v_data.push(v_ranVal);
+    }
+    console.log(v_data);
+
+    //데이터 변경
+    chart.data.datasets[0].data = v_data;
+
+    //타입 변경
+    let v_type = ["bar", "line", "pie", "radar", "doughnut"];
+    let v_ranType = Math.floor(Math.random()*v_type.length);
+    chart.data.datasets[1].type = v_type[v_ranType];
+
+
+    //변경한 값을 차트에 반영하는 가장 중요한 메소드 : update()
+    chart.update();
+  });
+
+  //랜덤색 적용
+  v_btn[1].addEventListener('click', function(){
+    chart.data.datasets[0].backgroundColor 
+              //= ['gray', 'black', 'lightgray', 'navy'];
+                = randomColor();
+    chart.update();
+  });
+    
+  function randomColor(){
+
+    let v_colors = []; // 랜덤색 4개를 담을 공간
+
+    for(let i=0; i<4; i++){
+
+      let v_rgb = `rgb(${f_random(0,255)},${f_random(0,255)},${f_random(0,255)})`;
+      v_colors.push(v_rgb);
+
+    }
+    return v_colors;
+  }
+
+  v_btn[2].onclick = function(){
+
+    let req = new XMLHttpRequest();
+    req.open('get', './testData.json');
+    req.onreadystatechange = function(){
+      if(req.readyState == 4 && req.status == 200){
+
+        console.log(req.responseText); //json문자열
+        console.log(JSON.parse(req.responseText)); //js객체
+        f_updateChart(JSON.parse(req.responseText));
+      }
+    }
+    req.send();
+  }
+
+  function f_updateChart(p_obj){
+
+    chart.data.labels = p_obj.labels;
+
+    chart.data.datasets.splice(0,1); //index1번 위치 배열값 삭제 후
+
+    chart.datd.datasets.push({});
+
+    //index1 위치에 값 추가
+    chart.data.datasets[0].label = p_obj.label;
+    chart.data.datasets[0].type = p_obj.type;
+    chart.data.datasets[0].data = p_obj.data;
+
+    chart.update();
+  }
+
+</script>
+</body>
+
+</html>

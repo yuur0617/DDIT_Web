@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+<style>
+    div{
+        border: 1px solid red;
+        padding : 10px
+    }
+</style>
+</head>
+<body>
+    <h4>:checked :selected</h4>
+    <span>취미</span>
+    <input type="button" value="선택"><br>
+    <input type="checkbox" value="여행">여행
+    <input type="checkbox" value="브이로그">브이로그
+    <input type="checkbox" value="베이킹">베이킹
+    <input type="checkbox" value="슬라임">슬라임
+    <!-- <div>출력영역</div> -->
+    <hr>
+
+    <br><br>
+    <select id="sel">
+        <option>선택</option>
+        <option>개나리</option>
+        <option>진달래</option>
+        <option>민들레</option>
+        <option>목련</option>
+        <option>왕벚꽃</option>
+    </select>
+    <button>선택</button>
+    
+    <hr>
+    
+    <br>
+    <select id="sel2" multiple size="5">
+        <option>개나리</option>
+        <option>진달래</option>
+        <option selected>민들레</option>
+        <option>목련</option>
+        <option>왕벚꽃</option>
+    </select>
+    <button>선택</button>
+    
+    
+    <div>출력영역</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+
+    $('button').eq(1).on('click',function(){
+
+        let opt ="";
+        // console.log($('#sel2 option:selected').text());
+        $('#sel2 option:selected').each(function(i){
+            // console.log($(this).text);
+            if(i >0){
+                opt += "~ ";
+            }
+            opt += $(this).text();
+        });
+        $('div').text(opt);
+    });
+
+    $('#sel').on('change',function(){
+        // alter($(this).val())
+    });
+
+    // <button>대상으로 이벤트 부여
+    $('button').eq(0).on('click', function(){
+        if($('#sel').val() == '선택'){
+            $('div').text(""); // 기본 정보 초기화
+            return; //함수 종료
+        }
+        $('div').text($('#sel').val())
+    });
+
+    // :button >> 입력양식선택자 >> button요소와 type이 button인 요소
+    $("input:button").on('click', function(){
+
+        let hobby = "";
+        // console.log($(':checkbox:checked').val()); //html() - 첫번째 대상만 반환
+        // each() >> 순차적인 정보를 얻어내기
+        // 선택자. each(fnc)
+        $(':checkbox:checked').each(function(i){
+            // console.log(this.value); // 선택자에 해당되는 모든 요소 반환 -> value반환
+            // console.log($(this).val());
+            if(i > 0){
+                hobby += " / ";
+            }
+            hobby += $(this).val();
+
+        });
+        if(hobby==""){
+            hobby += "선택된 항목이 없습니다."
+        }
+        $('div').text(hobby);
+
+    });
+</script>
+</body>
+</html>

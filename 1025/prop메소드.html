@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    div{
+        border-style: solid;
+        padding: 40px;
+        margin-top: 5px;
+    }
+</style>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+
+    $(function(){
+        let v_chk;
+        let v_rdo;
+        let v_sel;
+        let v_txt;
+
+        let result;
+
+        $('#runBtn').on('click', function(){
+            // console.log($('#chk').prop('checked')); //속성 존재 여부를 boolean으로 반환
+            // console.log($('#rdo').prop('checked')); 
+            // console.log($('#sel option').eq(1).prop('selected')); 
+            // console.log($('#txt').prop('readonly')); 
+            v_chk = $('#chk').prop('checked'); //속성 존재 여부를 boolean으로 반환
+            v_rdo = $('#rdo').prop('checked'); 
+            v_sel = $('#sel option').eq(1).prop('selected'); 
+            v_txt = $('#txt').prop('readonly'); 
+
+            result = "체크박스 상태 : " + v_chk + "<br>";
+            result += "라디오 버튼 상태 : " + v_rdo + "<br>";
+            result += `콤보박스중 옵션 2번에 대한 상태 : ${v_rdo}  <br>`;
+            result += `텍스트 필드의 읽기전용 상태 : ${v_txt}  <br>`;
+
+            $('div').html(result);
+        });
+
+        $('#chgBtn').on('click',function(){
+            // 현재 요소 상태 값을 반대로 설정하기
+            $('#chk').prop('checked', !v_chk); // set
+            $('#rdo').prop('checked', !v_rdo); 
+            $('#sel option').eq(1).prop('selected', !v_sel); 
+            $('#txt').prop('readonly', !v_txt);
+
+            result = "체크박스 상태 : " + v_chk + "<br>";
+            result += "라디오 버튼 상태 : " + v_rdo + "<br>";
+            result += `콤보박스중 옵션 2번에 대한 상태 : ${v_rdo}  <br>`;
+            result += `텍스트 필드의 읽기전용 상태 : ${v_txt}  <br>`;
+
+            $('div').html(result);
+        });
+    });
+</script>
+<body>
+    <h4>요소의 상태 제어 및 상태값을 boolean으로 반환 / 설정</h4>
+    <form>
+        <input type="checkbox" id="chk">
+        <input type="radio" id="rdo">
+        <select id="sel">
+            <option value="">-</option>
+            <option value="1">일</option>
+            <option value="2">이</option>
+            <option value="3">삼</option>
+            <option value="4">사</option>
+        </select>
+        <input value="가나다" id="txt" readonly> <br><br>
+
+        <input type="button" value="현재 상태 값 출력 " id="runBtn">
+        <input type="button" value="반대 상태로 변경 " id="chgBtn">
+    </form>
+    <div></div>
+
+    <hr>
+
+    <div>
+        <input type="checkbox" id="chkAll">전체선택
+        <input type="checkbox" class="chk">1
+        <input type="checkbox" class="chk">2
+        <input type="checkbox" class="chk">3
+        <input type="checkbox" class="chk">4
+        <input type="checkbox" class="chk">5
+    </div>
+
+<script>
+    // 전체선택으로 제어
+    $('#chkAll').on('click', function(){
+        console.log($(this).prop('checked'));
+        $('.chk').prop('checked', $(this).prop('checked'));
+    });
+
+    // 전체선택의 하위 형제요소들로 제어
+    $('.chk').on('click',function(){
+        let orgChk = $('.chk').length;
+        let choose = $('.chk:checked').length;
+        if(orgChk == choose){
+            $('#chkAll').prop('checked', true);
+        }else{
+            $('#chkAll').prop('checked', false);
+        }
+    })
+
+</script>
+</body>
+</html>

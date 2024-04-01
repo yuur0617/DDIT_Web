@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <select id="sido">
+        <option value="">선택하세요</option>
+        <option value="">서울특별시</option>
+        <option value="">세종시</option>
+        <option value="">대전광역시</option>
+        <option value="">제주시</option>
+    </select>
+    <select id="gugun"></select>
+
+    <p>선택</p>
+
+<script src="../js/code.jquery.com_jquery-3.7.1.min.js"></script>
+<script>
+    // $('#sido').on('change',function(){})     // addEventListener
+    // $('#sido').change(function(){}           // onEvent = fnc(){}
+    $('#sido').change(function(){ 
+        let v_opt = "<option>대덕구</option>";
+        v_opt += "<option>동구</option>";
+        v_opt += "<option>서구</option>";
+        v_opt += "<option>유성구</option>";
+        v_opt += "<option>중구</option>";
+
+        $('#gugun').html(v_opt);
+        // $('#gugum').text("");
+        // $('#gugun').append(v_opt);
+    });
+    
+    // trigger - 대상요소에 적용되어 있는 이벤트를 강제적으로 실행하는 기능
+    $('#sido').trigger('change');
+    $('option:nth-of-type(4)').prop('selected', true);
+
+    // trigger(fn, param) - 함수로 매개변수 전달하기
+
+    // 이벤트 실행시 연결된 함수의 첫번째 인자는 '이벤트 객체'이다
+    // 두번째 인자부터 trigger를 통해 전달받은 매개변수
+    $('p').on('customEvent',function(e, a,b,c,d,ee){
+        // 이벤트 객체 > 현재 실행된 이벤트 타입(이벤트명)을 반환
+        // 이벤트 키워드 > 트리거 직전에 발생된 이벤트 타입(이벤트명)을 반환
+
+        alert(e.type + "\r\n" + e.target + "\r\n" 
+        + a + "\r\n" + b + "\r\n" + c + "\r\n" + d + "\r\n" + ee);
+
+        alert(a[1] + a[2] + a["three"] + a[4]);
+    });
+
+    $('p').on('click', function(){
+        $(this).trigger('customEvent',['대', '덕', '인', '재']);
+        // $(this).trigger('customEvent', {1:"D", 2:'d', three:'i', 4:'t'});
+    });
+        
+</script>
+</body>
+</html>

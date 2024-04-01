@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+<script src="../js/code.jquery.com_jquery-3.7.1.min.js"></script>
+<script>
+    $(function(){
+        $('[value="text"]').on('click', function(){
+            // 모든 p요소 대상으로 태그를 제외한 문자열정보 반환
+            console.log($('p').text());
+        });
+
+        $('[value=html]').on('click', function(){
+            // 첫번째 p 요소만 대상으로 태그를 포함한 문자열정보 반환
+            console.log($('p').html());
+        });
+
+        $('[value=each]').on('click', function(){
+            // 일치하는 각 요소에 대해 실행할 함수 지정
+            // 선택자 대상 each - $(선택자).each(함수)
+            $('p').each(function(i, v){
+                // console.log($('p')); //모든 p요소 대상으로 갯수만큼 반복적으로 제공
+                // console.log($('p').length);
+                // console.log(this); //대상요소의 순차적인 정보 제공
+                // console.log(i); // 대상요소의 index 정보
+                // console.log(v); // this와 동일, 대상요소의 순차적인 정보 제공
+                console.log("------------------------------------------------");
+                // 갯수만큼 반복적으로 모든 p요소를 반환하는 대상에 html() 사용 >> 첫번째 항목들만 반환
+                console.log($('p').eq(i).html())
+                console.log($(this).html()); // 순차적 요소의 정보 반환
+                console.log($(v).html()) // String(primitive type)
+
+                console.log(Object.keys(obj));
+                console.log(Object.values(obj));
+                console.log(Object.entries(obj));
+            });
+
+            // $(선택자 대신 객체).each(함수) >> 결과 반환시
+
+            // $.each(선택자, 함수) >> 결과 .....
+        });
+
+        // 샘플객체
+        let obj ={
+            key1 : 'value1',
+            key2 : 'value2',
+            key3 : 'value3'
+        };
+
+        // 객체 대상 문법 $. each(객체, 함수)
+        // 객체가 가진 속성 갯수만큼 함수를 호출
+        $.each(obj, function(i, v){
+            console.log(this) //순차적인 값을 반환(String Object)
+            // console.log(i); // 객체의 key 정보 반환
+            // console.log(v); // String(primitive type)
+
+            // console.log( Object.key(obj));
+            // console.log( Object.values(obj));
+            // console.log( Object.entries(obj));
+        });
+
+        // 선택자 대상 문법 $(선택자 대신 객체).each(함수) 
+        $(obj).each(function(i, v){
+            console.log(this); // 객체반환
+            console.log(i); // 대상 요소의 index반환(obj 객체 한개)
+            console.log(v); // 객체 반환
+        });
+
+        // 객체 대상 문법 $.each(선택자, 함수)
+        // TypeError: Cannot use 'in' operator to search for 'length' in p
+        //  => TypeError: 'in' 연산자를 사용하여 p의 'length'를 검색할 수 없습니다.
+
+        $.each('p', function(){})  // => 갯수만큼 함수를 호출할 대상이 잘못 설정되었음에도 에러 발생
+    });
+</script>
+</head>
+<body>
+    <p>1<span>백두산</span></p>
+    <p>2<span>한라산</span></p>
+    <p>3<span>금강산</span></p>
+
+    <input type="button" value="text">
+    <input type="button" value="html">
+    <input type="button" value="each">
+</body>
+</html>

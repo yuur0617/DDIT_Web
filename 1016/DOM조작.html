@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" id="addElem" value="요소 추가">
+    <input type="button" id="addImg" value="이미지 추가">
+    <input type="button" id="addImg2" value="이미지 추가2">
+    <input type="button" id="addA" value="하이퍼링크 추가">
+    <div id="wrapper"></div>
+
+<script src="../js/random.js"></script>
+
+<script>
+
+    let v_index = 1;
+
+    let v_disp = document.querySelector('#wrapper');
+
+    document.querySelector('#addElem').addEventListener('click',function(){
+         //h4태그 생성하고 화면에 추가하기
+        let v_h4 = document.createElement('h4');
+
+        // 방식1
+        // let addTxt = document.createTextNode('헤더라인 테그 4');
+        // v_h4.appendChild(addTxt);
+
+        // 방식2
+        // v_h4.innerHTML = "headerlineTag4";
+
+        // 방식 3
+        v_h4.insertAdjacentHTML('beforeend', "createElement" + v_index);
+        v_h4.style.color = f_rgb();
+        v_h4.style.backgroundColor = f_rgb();
+        console.log(v_h4);
+
+        v_disp.appendChild(v_h4); //대상위치로 추가된 요소를 삽입
+
+        v_index++;
+    });
+   
+    let f_rgb = function(){
+        return "rgba(" + f_random(0,255) + "," 
+                       + f_random(0,255) + "," 
+                       + f_random(0,255) + ","
+                    //    + "0." + f_random(1,9) + ")";
+                       + Math.random().toFixed(1) + ")";
+    };
+
+    // 이미지를 노드 메소드로 생성하기 >> appendChild(), append()
+    // document.getElementById('addImg').addEventListener('click', function(){})
+    document.getElementById('addImg').onclick =  function(){
+
+        let v_img = document.createElement('img');
+        //src, alt+속성 필수
+        // v_img.src="../images/ogu.jpg";
+        v_img.setAttribute('src','../images/ogu02.jpg');
+        v_img.alt = "대체 텍스트 넣음";
+        // v_img.width = 100;
+        v_img.setAttribute('width', '500px;');
+        // v_img.style.width = "300px";
+
+        v_img.style.border = "1px solid skyblue";
+        console.log(v_img);
+
+        v_disp.appendChild(v_img)
+    };
+
+    //이미지를 DOMString으로 생성하기 >> innerHTML, insert~()
+    document.querySelector('#addImg2').addEventListener('click', function(){
+        
+        let v_img2 = "<img src='../images/ogu03.jpg' alt ='오구'>";
+        console.log(v_img2);
+        //append() - 태그를 파싱하지 않고, 문자그래도 표현
+        v_disp.innerHTML = v_img2;
+
+
+    });
+
+    document.querySelector('#addA').addEventListener('click', function(){
+        let v_tagA = document.createElement('a');
+        v_tagA.href = "http://www.ddit.or.kr";
+        v_tagA.innerText = "DDIT";
+
+        console.log(v_tagA);
+        v_disp.append(v_tagA);
+
+        //DDIT 하이퍼링크의 링크 문장을 변경해봅시다 - insertData(offset, data)
+        v_tagA.firstChild.insertData(0, "대덕인재개발원") //text node
+        v_tagA.firstChild.deleteData(7,4);
+    });
+</script>
+
+</body>
+</html>

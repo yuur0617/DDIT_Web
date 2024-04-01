@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    img{
+        width: 150px;
+        height: 150px;
+    }
+    #wrapper{
+        font-size:0;
+    }
+</style>
+</head>
+<body>
+    <div id="wrapper">
+        <img src="../images/ogu05.jpg" alt="">
+        <img src="../images/ogu07.jpg" alt="">
+        <img src="../images/ogu12.jpg" alt="">
+        <img src="../images/ogu13.jpg" alt="">
+    </div>
+    <input type="button" id="left" value="&lt;&lt;&lt;">
+    <input type="button" id="stop" value="||">
+    <input type="button" id="right" value="&gt;&gt;&gt;">
+
+<script>
+
+    let v_parent = document.querySelector('#wrapper');
+    let v_left = document.getElementById('left');
+    let v_right = document.getElementById('right');
+
+    let timer;
+
+    /* proxy pattern - 대리로 대신 처리하여 로직의 흘므을 제어하는 행동 패턴 */
+
+    let v_flag = false; // 상태변수
+    function f_proxyLeft(){
+        if(!v_flag){
+            f_moveLeft(); // 대신호출
+            v_flag = true; // 상태변경
+        }
+    }
+    function f_proxyRight(){
+        if(!v_flag){
+            f_moveRight(); // 대신호출
+            v_flag = true; // 상태변경
+        }
+    }
+    function f_proxyStop(){
+        f_stop();
+        v_flag = false;
+    }
+
+    v_left.addEventListener('click',f_proxyLeft);
+
+    function f_moveLeft(){
+
+        let firstChild = v_parent.children[0];
+        v_parent.append(firstChild);
+        timer = setTimeout(f_moveLeft, 1000) //재귀호출
+
+    }
+
+    v_right.onclick = f_proxyRight;
+
+    function f_moveRight(){
+        
+        let lastChild = v_parent.lastElementChild;
+        v_parent.insertBefore(lastChild, v_parent.children[0])
+        timer = setTimeout(f_moveRight, 1000);
+
+        }
+
+    document.querySelector('#stop').addEventListener('click', f_proxyStop);
+    function f_stop(){
+        clearInterval(timer);
+    }
+        
+    
+
+</script>
+</body>
+</html>

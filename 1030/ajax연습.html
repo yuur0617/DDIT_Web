@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <input type="button" value="AJAX">
+    <input type="button" value="CSV">
+    <input type="button" value="JSON">
+    <input type="button" value="XML">
+</body>
+<script>
+
+    let v_disp = document.querySelector('body');
+
+    document.getElementsByTagName('input')[3].onclick=function(){
+        let ajax = new XMLHttpRequest();
+        ajax.open('get', 'test.xml');
+        ajax.onreadystatechange = function(){
+            if(ajax.readyState == 4 && ajax.status==200){
+                f_xml(this.responseXML);
+            }
+        }
+        ajax.send();
+    }
+
+    function f_xml(p_data){
+        console.log(p_data);
+        let v_friends = p_data.querySelectorAll('friend');
+        console.log(v_friends);
+
+        let v_tbl ="<table border =1>";
+        for(let i = 0; i<v_friends.length; i++){
+            v_tbl += "<tr>";
+            
+            //cell 데이터 생성
+            console.log(v_friends[i].children.innerText);
+            for(let j=0; j<v_friends[i].children.length; j++){
+                v_tbl += "<td>"+ v_friends[i].children[j].textContent + "</td>";
+            }
+            v_tbl += "</tr>"
+        }
+        v_tbl += "</table>";
+        // v_disp.innerHTML += v_tbl;
+        v_disp.insertAdjacentHTML ('beforeend', v_tbl);
+    }
+
+
+    document.querySelector('[value = JSON]').onclick = function(){
+        //1. 객체생성
+        let req = new XMLHttpRequest();
+        //2. 요청설정
+        req.open('get', 'test.json', true);
+        //4. 응답받기
+        req.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                // console.log(JSON.parse (this.responseText)); // 문자열 >> 객체로 변환
+                let jsonObj = JSON.parse(this.responseText);
+                f_json(jsonObj);
+            }
+        }
+        //3. 요청전송
+        req.send();
+    };
+
+    function f_json(p_data){
+        console.log(p_data);
+        let v_tbl ="<table border =1>";
+        v_tbl += "<tr><th>이름</th><th>종류</th><th>별명</th></tr>";
+
+        for(let i=0; i<p_data.length; i++){
+            v_tbl += `<tr><td>${p_data[i].name}</td>`;
+            v_tbl += `<td>${p_data[i].type}</td>`;
+            v_tbl += `<td>${p_data[i].alias}</td></tr>`;
+        }
+
+        v_tbl += "</table>";
+        // v_disp.innerHTML += v_tbl;
+        v_disp.insertAdjacentHTML ('beforeend', v_tbl);
+    }
+
+    document.querySelectorAll('input')[1].addEventListener('click',function(){
+        //1. new XMLHttpRequest()
+        let ajax = new XMLHttpRequest();
+        //2. open('get', 'test.csv', ture)
+        ajax.open('get','../1030/test.csv');
+        //3. onreadystatechange(readyState,status) =>console.log(responseText)
+        ajax.onreadystatechange = function(){
+        if(ajax.readyState == 4 && ajax.status == 200){
+            console.log(ajax.responseText)
+            f_csv(ajax.responseText);
+        }
+    }
+    //4. send()
+    ajax.send();
+    });
+    document.querySelectorAll('input')[0].addEventListener('click',function(){
+    //1. 객체 생성하기 - new XMLHttpRequest
+        let ajax = new XMLHttpRequest();
+    //2. 요청 설정 - open(method, url, async생략가능)
+        ajax.open('get','../1030/ajax.txt');
+    //4. 응답 받기 - onreaystatechange, readyState, status => responseText
+        ajax.onreadystatechange = function(){
+            if(ajax.readyState == 4 && ajax.status == 200){
+                // v_disp.innerHTML += "<h1>"+ajax.responseText+"</h1>";
+            }
+        }
+    //3. 요청 전달 - send()
+        ajax.send();
+        
+    });
+
+    function f_csv(p_data){
+        let v_lines = p_data.split("\r\n");
+        let v_tbl="<table border=1>";
+        for(let i=0; i<v_lines.length; i++){
+            v_tbl += "<tr>"
+
+            //cell정보 분리시키기
+            let v_cells = v_lines[i].split(",");
+
+            for(let j=0; j<v_cells.length; j++){
+                if(i<1){
+                    v_tbl += "<th>" + v_cells[j] + "</th>";
+                }else{
+                    v_tbl += "<td>" + v_cells[j] + "</td>";
+                }
+            }
+            v_tbl += "</tr>"
+        }
+        v_tbl += "</table>"
+        // v_disp.innerHTML +=v_tbl;
+        v_disp.insertAdjacentHTML ('beforeend', v_tbl);
+    };
+    document.querySelector()
+</script>

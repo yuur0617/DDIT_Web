@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h4><a href="javascript:f_after100day()">100일 후 날짜</a></h4>
+    <h4><a href="javascript:f_suryo()">수료까지 남은 일자(D-Day)</a></h4>
+    <h4><a href="javascript:f_anniv()">지나온 일자(D+Day)</a></h4>
+    <h4>
+        <a href="javascript:f_refund()">교환 가능일 계산</a>
+        <input type="date" id="calender">
+    </h4>
+
+<script>
+// 오늘 까지의 경과시간 구하기
+let today = new Date();
+
+    //환불 가능일
+    let f_refund =function(){
+        
+        //구매날짜 정보 가져오기
+        let calender = document.querySelector('#calender');
+
+        // 날짜 정보 null 체크
+        if(calender.value == ""){
+            alert("날짜를 선택하세요!")
+        }
+
+        let buyDate = new Date(calender.value);
+        let buyMs = buyDate.getTime();  //구매일까지의 경과시간
+        let todayMs = today.getTime();  //오늘까지의 경과시간
+
+        let ms = todayMs - buyMs; 
+        let dd = ms/1000/60/60/24;
+        dd = parseInt(dd);
+
+        if(dd > 7){
+            alert("환불기간이 지났음 :(")
+        }else if(dd < 0){
+            alert(today.toLocaleDateString() + " 보다 이전날짜를 선택하세요!")
+        }else {
+            alert("환불이 가능함 :)")
+        }
+
+        calender.value = ""; //선택된 값 초기화
+
+    };
+
+    //지나온 기간 계산
+    let f_anniv = function(){
+        let worldCup = new Date("2002.5.31"); // 1970~2002월드컵까지 경과시간
+        
+        let worldcupMs = worldCup.getTime(); //오늘까지의 경과시간
+        let todayMs = today.getTime(); 
+        
+        let ms = todayMs - worldCup; //공식 : todayMs = worldcupMs
+
+        let dd = ms/1000/60/60/24;
+
+        let result = "오늘 날짜 : " + today.toLocaleDateString() + "<br>";
+        result += "D + " + dd.toFixed() + "일";
+
+        document.querySelector('body').innerHTML += result;
+    }
+
+    let f_suryo = function(){
+        let suryo = new Date("2024.4.2");
+
+        let suryoMs = suryo.getTime(); //1970~수료일까지의 경과시간 ms
+        let todayMs = today.getTime();
+
+        let ms = suryoMs - todayMs;
+        let dd = ms/1000/60/60/24; // 일자 정보
+
+        //출력코드
+        let result = "수료일 : " + suryo.toLocaleDateString() + "<br>";
+        result += "오늘 날짜 : " + today.toLocaleDateString() + "<br>";
+        result += "D - " + dd.toFixed() + "일";
+        
+        document.querySelector('body').innerHTML += result;
+    }
+
+    let f_after100day = function(){
+        let todayMs = today.getTime();
+
+        // 500일에 대한 ms 구하기
+        let day100Ms = 1000*60*60*24*100
+
+        let after100 = new Date(todayMs + day100Ms); //기준일 이후의 ms날짜 정보 반환
+        // 일자로 표현하기 
+        console.log(after100.toLocaleDateString() + "일")
+    };
+</script>
+</body>
+</html>

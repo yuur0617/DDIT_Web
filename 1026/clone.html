@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <p id="p1">인수로 true설정시 이벤트 처리기도 함께 복사</p>
+    <input type="button" value="clone()">
+    <input type="button" value="clone(true)">
+    <div></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $('p').on('click', function(){
+        $(this).css('font-size', '+=1px');
+    });
+
+    // 복사되는 p요소와 원본 p소를 구분하기 위한 id 속성 지정 필수
+    // >> 구분되지 않으면 모든 p요소 대상으로 배수 복사됨 주의
+
+    $(':button').eq(0).on('click',function(){
+        let v_cln = $('#p1').clone(); //복사하고 선택
+        $('div').append(v_cln); // 붙여넣기
+    });
+
+    $(':button').eq(1).on('click',function(){
+        let v_cln = $('#p1').clone(true); // 이벤트 처리기 까지 복사
+        $('div').append(v_cln); // 붙여넣기
+    });
+</script>
+</body>
+</html>

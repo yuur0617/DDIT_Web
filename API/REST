@@ -1,0 +1,17 @@
+REST(REpresentation-표현 State-상태 Transfer-전송)
+: 자원을 URI로 표시하고 자원의 행위를 HTTP METHOD로 정하여 상태에 대한 결과를 받는 것
+: URI로 접근하여 DATA를 받아 페이지를 생산하는 방식 
+
+구성
+    - 자원(Resource) - URI
+    - 행위(Verb) - HTTP METHOD(GET-Read / POST-create / PUT-Update / DELETE)
+    - 표현(Representations)
+
+REST API
+: REST한 방식으로 데이터를 상호 교환하게 설계된 API
+
+REST-ful
+: REST답게 사용하기 위해 개발자들이 비공식적으로 제시한 형태
+: 이해와 사용이 쉬운 REST api를 생성하기 위한 방향성
+
+ex. REST방식스러운 >> 자원과 상태로 표현된 정보를 주고받는..

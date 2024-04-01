@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    // //동기적 코드 흐름
+    // alert("1");
+    // (function(p_arg){alert(p_arg)})("2");
+    // function fnc(){
+    //     alert("3");
+    // }
+    // fnc();
+    // alert("4");
+
+    //비동기적 코드 흐름
+    
+    alert("a");
+    setTimeout(fnc1,1000);
+    alert("c");
+    $.get('test.txt',function(res){alert(res)});    //AJAX(비동기통신)
+    function fnc1(){
+        alert("b");
+    }
+</script>

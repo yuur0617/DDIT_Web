@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div data-num="n1">디브1</div>
+    <div data-num="n3">디브2</div>
+    <div data-num="n6">디브3</div>
+    <div data-num="n7">디브4</div>
+    <div data-num="n8">디DIV브5</div>
+
+    <input name="n_txt" value="aa">
+    <input name="n_txt" value="bb">
+    <input name="n_txt" value="cc">
+    <input name="n_txt" value="bb">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    // 1. 두번째 div 요소의 내용을 텍스트필트(Val()사용)에 넣기
+    // $('input').val($('div').eq(1).text()/*두번째 div내용*/); //일괄set
+
+/*
+     text() - 모든 정보읽음(get) / 일괄 적용(set) 및 콜백으로 일부 대상에 부분 적용(조건 외 항목 내용 유지)
+     html() - 첫번째 항목만 읽음(get) / 일괄 적용(set) 및 콜백으로 일부 대상에 부분 적용 (조건 외 항목 값 반드시 반환)
+     val() - 첫번째 항목만 읽음(get) / 일괄 적용(set) 및 콜백으로 일부 대상에 부분 적용 (조건 외 항목 값 반드시 반환)
+*/  
+
+    // 2. 첫번째와 네번째 텍스트필드의 내용을 'DIV'로 바꾸기 (val()사용)
+    $('input').val(function(p_inx, p_val){
+        // console.log(p_inx, "|", p_val)
+        if(p_inx == 0 || p_inx == 3){
+            // return "DIV로 변경";
+        }
+        return p_val;
+
+    });
+
+    // 3. 두번째와 세번째 div 요소의 내용을 'DIV'로 바구기 (text()사용)
+    $('div').text(function(p_inx, p_val){
+        // console.log(p_inx, p_val);
+        if(p_inx == 1 || p_inx == 2){
+            return "DIV" + (p_inx+1);
+        }
+    });
+
+    // 4. input요소 중 value 값이 'bb'인 항목만 속성 type을checkbox로 변경
+    $('input').val(function(p_inx, p_val){
+        // console.log(p_inx, p_val);
+        if(p_val == 'bb'){
+            // $(this).attr('type', 'checkbox');
+            this.type = 'checkbox';
+            $(this).after(p_val);
+
+        }
+        return p_val;
+    });
+
+    // 5. div 요소에 문자 'D'가 있는 항목만 스타일 변경
+    $('div').html(function(p_inx, p_html){
+        // console.log(p_inx, p_html);
+        // console.log(p_html.indexOf("D"), " | ", !p_html.indexOf("D"));
+        // if(!p_html.indexOf("D")){ // "D"로 시작하는 문장에만 사용가능한 조건
+        if(p_html.indexOf("D") != -1){ // 자유로운 위치에 "D"가 존재하는 문장 대상 조건
+            $(this).css('color', 'lime').css('backgroundColor', 'lightpink');
+        }
+    });
+
+    // 6. data-num속성의 값이 홀수인 것만 테두리 설정
+    $('div').attr('data-num', function(p_idx, p_attr){
+        console.log(p_idx, p_attr, p_attr.length);
+        let last = p_attr.substr(p_attr.length-1); // end 범위느느 생략햇고, start범위부터 
+        console.log(last);
+        if(last%2 ){ // 0 짝수(false), 1홀수(true)
+            $(this).css('border', '3px double skyblue')
+                    .css('border-radius', '20px')
+                    .css('margin', '10px 0');
+        }
+
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        img {
+            width: 100px;
+            position: relative;
+        }
+        #d1 {
+            border-style: solid;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="d1">
+        <img src="../images/ala.jpg" alt="알라">
+    </div>
+    <input type="button" id="toLeft" value="&lt;">
+    <input type="button" id="toRight" value="&gt;">
+    <button>버튼</button>
+    <hr>
+    <input type="button"value="확인">
+    <p id="p1">무궁화 꽃이 피었습니다 - CSS</p>
+    <p id="p2">무궁화 꽃이 피었습니다 - animate</p>
+    
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        // $('input:nth-of-type(2)')
+        $('input').eq(2).on('click',function(){
+            $('#p1').css('font-size','+=2px');
+            $('#p2').animate({'font-size':'+=2px'});
+        });
+        $('#toLeft').on('click',function(){
+            $('img').animate({left: '-=10px'},100);
+        });
+        $('#toRight').on('click',function(){
+            $('img').animate({left: '+=10px'},100);
+        });
+        $('button').on('click',function(){
+           $('img').hide('slow'); 
+           alert('숨김');
+        });
+        $('#d1').on('click',function(){
+            console.time("fade");
+            $('img').toggle(3000,function(){
+                console.timeEnd("fade");
+            });
+        });
+        /*
+        동기 - 현재 실행중인 코드가 끝나고 다음 코드를 실행
+        비동기 - 현재 실행중인 코드가 완료되지 않은 상태에서 다음 코드를 실행
+
+        자바스크립트는 기본적으로
+        인터프리터 방식(=한줄씩 해석하고 표현)이자,
+        동기방식(=한번에 한 작업만 수행가능한 싱글 스레드)언어
+
+        하지만 동기처리시 Blocking현상이 발생되므로 작업적 효율을 위해 비동기방식이 대체가 됨
+        *동시 처리(비동기)되어야 하는 여러 작업 ex)이미지, 페이지 로딩, 버튼-키보드 누르기 등등
+        >> 해당 작업의 완료까지 화면이 멈추는 현상(Blocking)이 발생되므로 효율적인 처리를 위해 비동기 필요
+
+        비동기 주요 사례
+         - 마우스 ,키보드의 입력(click,keydown 등)
+         - 페이지 로딩(DOMContentLoaded 등)
+         - 타이머 API(setTimeout() 등)
+         - 애니메이션 API
+         - AJAX >> XHR객체를 사용한 비동기 통신 방식
+         - fetch API >> Promise객체 기반 비동기 통신 방식
+        */
+    </script>
+</body>
+</html>

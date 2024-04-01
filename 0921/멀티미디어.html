@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 어떠한 브라우저에 접근하더라도 콘텐츠가 무리없이 잘 보여질 수 있도록 많은 소스파일을 준비 -->
+    <audio controls autoplay muted >
+        <source src="../multimedia/Shining Road.mp3" type="">
+        mp3 확장자<br>
+        <source src="../multimedia/Shining Road.m4a" type="">
+        m4a 확장자<br>
+        <source src="../multimedia/Shining Road.ogg" type="">
+        ogg 확장자<br>
+    </audio>
+    <video controls autoplay muted>
+        <source src="../multimedia/백예린𝐈𝐦𝐧𝐲𝐨𝐚.mp4">mp4 확장자<br>
+        <source src="../multimedia/백예린𝐈𝐦𝐧𝐲𝐨𝐚.mkv">mkv 확장자<br>
+    </video>
+
+    <!-- 자동재생을 허용하는 옵션들 -->
+
+    <!-- autoplay속성 적용시 최초 접근하여 로딩되는 페이지에서 자동실행 하지만 페이지 새로고침시 자동재생 하지 않음 -->
+    <!-- 브라우저 정책에 따라 muted속성 적용시 음소거 상태로 자동실행해주기도 함 -->
+    <!-- 사용자가 각 브라우저에 환경설정을 통해 자동재생하기도 함 -->
+<script>
+    document.querySelector('#autoP').play();
+</script>
+
+</body>
+</html>

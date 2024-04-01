@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+	$('li:first, li:last').css('background-color', 'yellow');
+	$('li:eq(4)').css('font-style', 'italic');
+	
+  // :li, :gt에 적용된 index는 포함하지 않음
+	$('li:lt(4)').css('color', 'green');
+	$('li:gt(4)').css('color', 'brown');
+
+  $('li').first().css('background-color', 'orange')
+  $('li').last().css('background-color', 'blue')
+  $('li').eq(1).css('background-color', 'pink')
+  // :lt, :gt >> slice(str, end<= 미포함이며 생략가능 )로 대체
+  $('li').slice(0,4).css('color', 'red');
+  $('li').slice(5).css('color', 'lightgreen');
+	
+	$('li:odd').css('border-style','inset'); //홀수
+	$('li:even').css('border-style','outset'); //짝수
+	$('li:not(.not)').css('textDecoration','line-through');
+});
+</script>
+<body>
+  <h4>기본필터</h4>
+  <ul>
+    <li>:first</li>
+    <li>:last</li>
+    <li>:eq(index)</li>
+    <li>:gt(index)</li>
+    <li>:lt(index)</li>
+    <li class="not">:odd</li>
+    <li class="not">:even</li>
+    <li class="not">:not(select)</li>
+  </ul>
+</body>
+</html>

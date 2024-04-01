@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h4>열린창(자식창)</h4>
+    <textarea id="new_text" cols="40" rows="20"></textarea> <br>
+
+    <input type="button" value="보내기">
+   
+<script>
+
+    let v_send;
+
+    document.querySelector('input').addEventListener('click', v_send = function(){
+        
+        let v_newTxt = document.querySelector('#new_text').value;
+        console.log(v_newTxt);
+
+        // 자식창 내용을 부모창으로 전달
+        opener.document.querySelector('#old_text').value = v_newTxt;
+
+        opener.document.querySelector('#old_text').scrollTop =
+            opener.document.querySelector('#old_text').scrollHeight;
+
+    });
+
+    //스크립트에서 keydown이벤트 주기
+    document.querySelector('#new_text').addEventListener('keydown', function(){
+        // alert(event.keyCode)
+        if(event.keyCode == 13){
+            v_send();
+        }
+
+    });
+</script>
+
+</body>
+</html>
+
+
+

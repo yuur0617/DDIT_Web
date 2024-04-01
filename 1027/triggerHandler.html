@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    :focus{
+        background-color: gold;
+    }
+</style>
+</head>
+<body>
+    <button>trigger</button>
+    <button>triggerHandler</button>
+
+    <input>
+    <input>
+    <input>
+
+<script src="../js/code.jquery.com_jquery-3.7.1.min.js"></script>
+<script>
+    // $('input').on('focus', function(){})
+
+    // 'focus'이벤트의 기본동작 >>포커싱 >> css도 반영됨
+    $('input').focus(function(){
+        $(this).val("쉬는시간!");
+    });
+
+    // trigger() - 이벤트의 기본 동작 수행
+    //           -  선택된 모든 요소에 동작
+    $('button').eq(0).click(function(){
+        $('input').trigger('focus');
+    });
+
+    // triggerHandler() - 함수만 실행시키고 
+    //                  - 이벤트 기본 동작은 수행안함
+    //                  - 선택된 첫번째 요소만 동작
+    $('button:nth-of-type(2)').on('click',function(){
+        $('input').triggerHandler('focus');
+    });
+</script>
+</body>
+</html>

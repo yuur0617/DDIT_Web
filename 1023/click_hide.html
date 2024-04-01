@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        button {
+            display: none;
+        }
+    </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+       
+    //기본 plane(javascript)객체와 jQuery객체가 사용할 수 있는 속성 및 메서드가 구분되어 있음!!
+    function fnc(p_this){   //원시 dom 객체(원래 javascript의 객체에는 원형의 속성, 메소드 사용불가);
+        // console.log($(p_this).text());
+        //click하면 hide기능
+        $(p_this).hide();   //숨김
+    }
+    document.addEventListener('DOMContentLoaded',function(){
+        //자바스크립트 방식
+        let v_jsH4=document.querySelectorAll('#js h4');    //id가 #js인 엘리먼트에 자식요소 h4들
+        let v_btn=document.querySelector('#js button');
+        let v_count=0;
+        for(let i = 0; i<v_jsH4.length; i++){
+            v_jsH4[i].addEventListener('click',function(){
+                // alert(this.innerText);    //this(자기참조변수)가 클릭된 항목을 가리킴
+                this.style.display="none";
+                v_count++;
+                //대상 갯수와 숨김처리된 갯수가 같을때 버튼 보여지게
+                if(v_jsH4.length==v_count){
+                    v_btn.style.display="inline";//button은 inline요소
+                    v_count=0;
+                }
+            });
+                
+        }
+        //show버튼 기능 부여
+        v_btn.addEventListener('click',function(){
+            for(let i=0;i<v_jsH4.length;i++){
+                v_jsH4[i].style.display="block";
+            }
+            this.style.display="none";
+        });
+
+        $('#jq h4').on('click', function(){
+            // alert($(this).text());
+            $(this).hide();
+            
+            // 조건(대상요소 모든 숨겨졌을 때)이 부합할 때 숨겨진 버튼 보이기
+            if($('#jq h4:visible').length < 1){
+            $('#jq button').css('display', 'inline')
+            }
+        });
+
+        $('#jq button').on('click', function(){
+            // 기존요소 보이기 - 일괄
+            $('#jq h4').css('display', 'block');
+            // 현재 버튼 숨기기
+            $(this).hide();
+        });
+    });
+</script>
+</head>
+<body>
+
+    <div id="js">
+        <h4>JAVASCRIPT 1</h4>
+        <h4>JAVASCRIPT 2</h4>
+        <h4>JAVASCRIPT 3</h4>
+        <h4>JAVASCRIPT 4</h4>
+        <button>SHOW</button>
+    </div>
+
+    <hr>
+
+    <div id="jq">
+        <h4>JQUERY 1</h4>
+        <h4>JQUERY 2</h4>
+        <h4>JQUERY 3</h4>
+        <h4>JQUERY 4</h4>
+        <button>SHOW</button>
+    </div>
+
+    <hr>
+
+    <h4 onclick="fnc(this)">click hide 1</h4>
+    <h4 onclick="fnc(this)">click hide 2</h4>
+    <h4 onclick="fnc(this)">click hide 3</h4>
+    <h4 onclick="fnc(this)">click hide 4</h4>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<!-- 
+    스타일 정의시 우선순위
+    - 인라인이 가장 높지만 사용미권장, 내부 정의 외부정의는 동률이나 후순위 작성이 우선
+    - 후순위로 작성되었다 하더라도 접근하는 선택자 계급별 우선순위가 존재(id > class > 요소..) 
+-->
+
+<!-- 내부 스타일 정의 -->
+
+<style>
+    /* 요소(태그)선택자 */
+    div {
+        color : forestgreen;
+        background-color : lightgray;
+    }
+    /* id 선택자 */
+    #elsa {
+        color : darkorchid;
+        /* 보더 색상이 정의되지 않았을때 color속성값을 적용받는 규칙 존재 */
+        border-style: double;
+        border-width : 4px;
+    }
+    /* class 선택자 */
+    .dsn{
+        color : aqua;
+    }
+    /* 전체 선택자 */
+    *{
+        border : 2px dotted black;
+    }
+    /* 다중 선택자 */
+    p, #px{
+        font-style: italic;
+    }
+</style> 
+</head>
+<body>
+    <!-- w3c의 권장 >> id는 페이지 내 유일한 값으로, class는 중복 적용해도 좋음 -->
+    <div class="dsn">라푼젤</div>
+    <div class="dsn">알라딘</div>
+    <div id="elsa" class="dsn">겨울왕국</div>
+    <div id="px">엘리멘탈</div>
+    <p class="dsn">라이언킹</p>
+</body>
+</html>

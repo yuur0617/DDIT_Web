@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    div{
+        background-color: yellow;
+        height: 25px;
+    }
+    p{
+        border : 3px solid gray;
+    }
+</style>
+</head>
+<body>
+    <input type="button" value="empty">
+    <input type="button" value="remove">
+    <input type="button" value="remove(sel)">
+
+    <div>
+        <p>Hello jQuery</p>
+    </div>
+    <div>
+        <p>Hi jQuery</p>
+    </div>
+    <p>안녕하세요</p>
+    <p id="pp">jQuery입니다.</p>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $('[value="empty"]').on('click', function(){
+        //empty() - 대상요소의 자식만 지움(비움)
+        $('div').eq(0).empty();
+    });
+
+    $(':button').eq(1).on('click', function(){
+        //remove() - 대상요소의 자식요소까지 모두 적용
+        $('div').eq(1).remove();
+    });
+
+    $('input').eq(2).on('click', function(){
+        //remove(sel) - 대상요소 중 특정 대상(sel)만 지움
+        $('p').remove('#pp');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    let req = new XMLHttpRequest();
+    req.open('get','http://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1'
+    +'?ServiceKey=4YSkrXohYyAXPdPB2O8cmGDqnL105iG%2FMGVcIlBeRKjx%2FeCKBVxfDc2yNiP%2F7AAFs3L7QzrpkEXVeikPDoOE1g%3D%3D'
+    +'&type=json');
+
+    req.onreadystatechange = function(){
+        if(req.readyState == 4 && req.status == 200){
+            console.log(req.responseText)
+        }
+    }
+
+    req.send();
+</script>

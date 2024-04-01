@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style>
+  :enabled{
+    border: 1px ridge blue;
+  }
+  :disabled{
+    border: 1px groove red;
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$(function(){
+  //스타일 적용 시점이 더 먼저 작성되어 상태에 변화가 생겨도 적절히 반영되지 못함.
+  // $(':enabled').css('border','1px ridge blue');
+  // $(':disabled').css('border','1px groove red');
+
+  //자바스크립트 방식으로 요소 활성화
+  let v_inputs = document.querySelectorAll('input'); //input만 대상으로 함
+  let v_forms = document.querySelectorAll('form *'); // form요소 안 모든 요소
+
+  // 일부분의 영역 활성화
+  // v_inputs[2].setAttribute('disabled', false); //x
+  v_inputs[2].removeAttribute('disabled'); 
+
+  //모든영역 활성
+  for(let i=0; i<v_forms.length; i++){
+    v_forms[i].removeAttribute('disabled');
+  }
+  
+  
+});
+</script>
+</head>
+<body>
+  <h4>:enabled :disabled</h4>
+  <form>
+    <input id="txt" disabled> <br>
+    <input type="password" id="pw" disabled> <br>
+    <select id="sel" disabled>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+    </select> <br>
+    <textarea id="mtline" disabled>multiline</textarea> <br>
+    <input type="button" value="확인" onclick="alert()" disabled>
+  </form>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    #container{
+        position: relative; /* absolute의 부모자격 조건을 설정함 */
+        border-style: solid;
+        width: 50%;
+        height: 250px;
+        top: 100px;
+        left: 100px;
+    }
+    .child{
+        width: 50px;
+        height: 50px;
+        border: 4px solid brown;
+        border-radius: 25px;
+        text-align: center;
+    /*  position: static; // position: static => default , 
+                            static 한 상태에서는 방향속성(top, left, right, bottom) 값에 적용받지 않음 */
+
+    /*  position: relative; // relative - static 한 위치로부터 적용한 방향속성의 위치로 이동함. */
+        
+    /*  position: absolute; // absolute - 부모를 기준으로 적용한 방향속성의 위치로 이동함.
+                                부모1 - 기본, 창(window, 브라우저)의 죄측상단을 기준으로 함,
+                                부모2 - 물리적으로도 (계층구조상)부모여야 하며,
+                                        부모의 조건으로는 position 속성중 static을 제외한 하나의 속성을 가져야 함. */
+
+
+    }
+    .h{
+        background-color: pink;
+        left: 10px;
+    }
+    .d{
+        background-color: yellowgreen;
+        left: 40px;
+    }
+    .s{
+        background-color: lightblue;
+        left: 70px;
+    }
+    .n{
+        background-color: lightgray;
+        left: 100px;
+    }
+    [value="move"]{
+        position: relative;
+        top: 350px;
+        
+    }
+</style>
+</head>
+<body>
+    <div id="container">
+        <div class="child h">한치</div>
+        <div class="child d" style="z-index: 1;">두치</div>
+        <div class="child s">세치</div>
+        <div class="child n" style="z-index: -1;">네치</div>
+    </div>
+    <input type="button" value="move">
+</body>
+</html>

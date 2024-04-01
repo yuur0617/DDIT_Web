@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 부트스트랩js파일 실행전에 미리 라이브러리를 준비시켜야 함 -->
+    <script src="../js/code.jquery.com_jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.5/dist/js/bootstrap.min.js"></script>
+<style>
+    div{
+        /* border: 2px solid gold; */
+        padding: 20px;
+    }
+    div[class|=container]{
+        border: 2px solid skyblue;
+    }
+    div[class|=col]{
+        border: 1px solid lightgreen;
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        가로 해상도에 따라 너비(width)변화 <br>
+        768px이상(sm) - width 720px / 992px이상(md) - width 960px / 1200px이상(lg) - width 1140px
+    </div>
+    
+    <div class="container-fluid">
+        가로 해상도 관계없이 너비 100%
+    </div>
+
+    <!-- 그리드 시스템 : 한 행에 최대 12개의 열을 허용 -->
+    <div class="container-fluid">
+        <!-- 행 생성 -->
+        <div class="row">
+            <!-- 열 생성, 최대 12개 까지 표현가능 -->
+            <!-- 각 클래스(xs, sm, md, lg)를 사용자의 해상도보다 크게 설정시 그리드 시스템 깨져보임 주의 -->
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-1"></div>
+            
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2"></div>
+
+            <div class="col-xs-4"></div>
+            <div class="col-xs-4"></div>
+            <div class="col-xs-4"></div>
+
+            <div class="col-xs-4"></div>
+            <div class="col-xs-8"></div>
+
+            <div class="col-xs-6"></div>
+            <div class="col-xs-6"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <!-- Trigger the modal with a button -->
+    <!-- <button type="button" class="btn btn-success btn-xs" data-toggle="modal" 
+        data-target="#myModal" data-backdrop="false">Open Modal</button> -->
+    <button type="button" class="btn btn-success btn-xs">Open Modal</button>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<script>
+    $('button').eq(0).on('click', function(){
+        $('#myModal').modal({
+            backdrop: false
+        }); // 모달오픈
+    })
+</script>
+</body>
+</html>

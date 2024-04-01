@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        ol li {
+          border-style: solid;
+        }
+        /* 스타일 코드 복사해옴 */
+        ul { 						
+          list-style: none;				  
+          text-align: center;			  
+          border-top: 4px inset red;
+          border-bottom: 4px inset red;		
+          padding: 10px 0;				  
+        }
+        ul li {
+          display: inline;
+          text-transform: uppercase;
+          padding : 0 10px;
+          letter-spacing: 10px;
+        }
+        ul li a {
+          text-decoration: none;
+          color: black;
+        }
+        ul li a:hover {
+          text-decoration: underline; 
+        }
+        /* 스타일 코드 복사해옴 */
+        /* td {
+          width: 100px;
+          height: 100px;
+        } */
+        table {
+          width: 800px;
+          /* border-collapse: collapse; */
+          border-spacing: 10px; /* border-collapse:separate일때 가용 */ 
+          empty-cells: hide;    /* border-collapse:separate일때 가용 */ 
+          text-align: center;
+          text-align-last: justify;
+          table-layout: fixed; /* default: auto - 컨텐츠 양에 따라 자동 분할 */
+        }
+        </style>
+</head>
+<body>
+    <ol style="list-style-image: url(../images/ddit.jpg);">
+        <li style="list-style-position: inside;">inside</li>
+        <li>outside</li>
+    </ol>
+
+    <ul>
+        <li><a href="">HOME</a></li>
+        <li><a href="">PRPJECT</a></li>
+        <li><a href="">NOTICE</a></li>
+        <li><a href="">QNA</a></li>
+    </ul>
+
+    <table border="">
+        <tr>
+            <td>a</td>
+            <td>b</td>
+        </tr>
+        <tr>
+            <td>c</td>
+            <td>d</td>
+        </tr>
+    </table>
+
+</body>
+</html>

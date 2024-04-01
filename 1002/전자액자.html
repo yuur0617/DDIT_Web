@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+img {
+  width: 70px;
+  height: 70px;
+}
+#parent {
+  border: 5px double gray;
+  width: 70px;
+  height: 70px;
+  position: relative; /* absolute의 부모자격갖음 */
+  top: 100px;
+  left: 100px;
+  overflow: hidden;
+}
+.child {
+  width: 420px; 
+  font-size: 0;
+  position: absolute;
+}
+button {
+  position: relative;
+  top: -10px;
+  left: 100px;
+}
+</style>
+</head>
+<body>
+    <div id="parent">
+        <div class="child">
+            <img src="../images/som1.jpg" alt="">
+            <img src="../images/som2.jpg" alt="">
+            <img src="../images/som3.jpg" alt="">
+            <img src="../images/som4.jpg" alt="">
+            <img src="../images/som5.jfif" alt="">
+            <img src="../images/som6.jfif" alt="">
+        </div>
+        <div class="child">
+            <img src="../images/wok1.jfif" alt="">
+            <img src="../images/wok2.jpg" alt="">
+            <img src="../images/wok3.jpg" alt="">
+            <img src="../images/wok4.jpg" alt="">
+            <img src="../images/wok5.jpg" alt="">
+            <img src="../images/wok6.jpg" alt="">
+        </div>
+    </div>
+    <button onclick="f_str()">출발</button>
+<script>
+    let v_child = document.querySelectorAll('.child'); //유사배열
+    
+    //두번째 이미지블럭의 위치 초기화 진행
+    if(!v_child[1].style.left){
+        v_child[0].style.left = "0px"; 
+        v_child[1].style.left = "420px";
+    }
+
+function f_str(){
+
+    console.log(parseInt(v_child[0].style.left));
+    //반복(loop)처리
+    if(parseInt(v_child[0].style.left) == -420) v_child[0].style.left = "420px";
+    if(parseInt(v_child[1].style.left) == -420) v_child[1].style.left = "420px";
+
+    //이미지블럭 왼쪽으로 이동처리
+    v_child[0].style.left = parseInt(v_child[0].style.left) -1 + "px";
+    v_child[1].style.left = parseInt(v_child[1].style.left) -1 + "px";
+
+    setTimeout(f_str, 10) //ms초가 지나면 함수 실행
+}
+</script>
+</body>
+</html>

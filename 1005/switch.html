@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    div{
+        border: 2px solid red;
+        height: 20px;
+    }
+</style>
+</head>
+
+<script>
+    let score = prompt("성적을 입력하세요.", "100점 만점");
+    console.log(score/10);
+    // 출력할 영역 가져오기
+    window.onload = function(){
+        let v_div = document.querySelector('div');
+        console.log(v_div)
+
+        switch(parseInt(score/10)){
+        case 10 : case 9 : 
+            v_div.innerText = "A"; 
+            break;
+        case 8 : 
+            v_div.innerText = "B"; 
+            break;  
+        case 7 : 
+            v_div.innerText = "C"; 
+            break;
+        case 6 : 
+            v_div.innerText = "D"; 
+            break;
+        default : 
+            v_div.innerText = "F"; 
+        }
+    }
+
+</script>
+<body>
+    <h4>성적 입력 후 등급 출력하기</h4>
+    <div> 결과 출력 영역</div>
+</body>
+</html>

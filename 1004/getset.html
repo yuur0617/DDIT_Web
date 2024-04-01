@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<!-- 
+    요소의 값 반환/설정 속성
+    innnerHTML  - 읽는 값에 태그를 포함한다.(때문에 보안상 취약한 단점 존재)
+                - HTML5 에서 innerHTML로 삽입된 코드 중 script존재시 실행하지 않도록 함
+                >> 보안점검을 거치는 프로젝트의 경우 코드 거부 가능성이 있으므로 
+                   특별한 경우를 제외하고 사용을 권장하지 않음
+                - 대채로 사용할 수 있는 메소드 >> insertAdjacentHTML()
+
+    innerText   - (elemet속성) 
+                - 사용자에게 보여지는 텍스트의 값을 읽음
+                - 연속되는 공백은 무시(= 하나의 공백으로 처리)
+                - 원시 텍스트의 랜더링 된 상태(=스타일 적용 후)를 보여줌
+
+    textContent - (node)속성
+                - 해당 노드의 텍스트 값(=원시 텍스트)을 읽음
+                - 공백을 그대로 표현하며 숨겨진 텍스트로 출력
+
+    value       - 입력요소의 초기 값 명시에 활용
+                - 입력요소 type에 따라 용도가 다르게 사용
+                    > text, password, hidden : 입력 필드 초기값 정의
+                    > button, reset, submit : 버튼 내 텍스트 정의
+                    > checkbox, radio : 필드 선택시 서버로 제출되는 값 정의
+ -->
+
+    <div id="d1">
+        <span style="color: lightgreen">오구!!           </span> 반가워 :P
+        <span style="display: none;">숨겨진 텍스트</span>
+    </div>
+
+    <div id="disp"></div>
+
+    <input type="button" value="innerHTML" onclick="f_innerHTML()">
+    <input type="button" value="innerText" onclick="f_innerText()">
+    <input type="button" value="textContent" onclick="f_textContent()">
+    <input type="button" value="innerHTML대안메소드" onclick="f_instHTML()">
+
+    
+</body>
+
+<script>
+    var v_d1 = document.getElementById('d1'); //ES2버전
+    var v_disp = document.querySelector('#disp'); //ES6버전
+
+    var v_Btns = document.getElementsByTagName('input');
+    var v_tcBtn = document.querySelectorAll('input'); //모든 input요소 (3개) 
+    console.log(v_tcBtn[2].value); // textContent버튼 //get
+    v_tcBtn[0].value = "버튼 이름 변경"; //set
+    v_Btns[1].value = "이것도 변경"
+
+
+    function f_innerHTML(){
+        var result = v_d1.innerHTML; //get
+        console.log(result);
+        v_disp.innerHTML = result; //set
+    }
+    function f_innerText(){
+        var result = v_d1.innerText; //get
+        console.log(result);
+        v_disp.innerText = result; //set
+    }
+    function f_textContent(){
+        var result = v_d1.textContent; //get
+        console.log(result);
+        v_disp.textContent = result.replaceAll(" ", "_"); //set
+        v_disp.innerHTML = result.replaceAll(" ", "&nbsp;"); //set
+    }
+    function f_instHTML(){
+        //insertAdjacentHTML(position)
+        v_disp.insertAdjacentHTML("beforebegin","<mark>요소외부 앞쪽</mark>");
+        v_disp.insertAdjacentHTML("afterbegin"
+                                ,"<span style='color:rd;'>요소내부 앞쪽</sapn");
+        v_disp.insertAdjacentHTML("beforeend","요소내부 뒤쪽");
+        v_disp.insertAdjacentHTML("afterbegin","<em>요소외부 뒤쪽</em>");
+    }
+</script>
+
+</html>

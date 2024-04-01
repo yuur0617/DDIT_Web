@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .backColor {
+            background-color: gold;
+            color: red;
+        }
+        .fontColor {
+            color: green;
+            font-size: 1.6em;
+        }
+        .border {
+            border: 3px dotted red;
+            
+        }
+    </style>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            $(function(){
+                $('#d1 .btn').on('click',function(){
+                    //1.filter()에 선택자 활용하기
+                    $('li').filter(':even').addClass('backColor');
+
+                    //2.filter()에 변수 활용하기
+                    let oddLi=':odd';
+                    $('li').filter(oddLi).addClass('fontColor');
+
+                    let secnLi=$('li').eq(1);
+                    $('li').filter(secnLi).addClass('border');
+
+                    $('li').filter(function(i){
+                        return i%3==0;
+                    }).addClass('border');
+                    
+                });
+            });
+        </script>
+</head>
+<body>
+    <h4>filter(): 선택자, 변수, 함수를 이용해 필터링하는 메소드</h4>
+    <div id="d1">
+        <ul>
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <input type="button" class="btn" value="filter()">
+    </div>
+
+    <h4>is(): 일치여부를 boolean으로 반환</h4>
+    <div id="d2">
+        <div>
+            <p>부모(div)있는 p</p>
+        </div>
+        <p>부모 없는 p</p>
+        <div>
+            <p>부모(div)있는 p</p>
+        </div>
+        <form id="frm">
+            <p>부모(form) 있는 p</p>
+        </form>
+    </div>
+    <script>
+        //id=d2내부의 div를 부모로 갖는 p요소 스타일주기
+        $('#d2 p').on('click',function(){
+           if($(this).parent().is('#d2 div')) {
+                $(this).parent().addClass('backColor');
+            }else{
+                alert("#d2내부 div가 부모가 아님");
+                alert(`대상요소와 부모는 ${$(this).parent().attr('id')}\/${$(this).parent().prop('tagName')}안 요소`);
+            }
+        });
+    </script>
+</body>
+</html>
